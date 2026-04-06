@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточка персонажа</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Киберкринж</h1>
+        <nav>
+            <a href="arsenal.html">Арсенал</a>
+            <a href="#">Об игре</a>
+        </nav>
+    </header>
+    <main>
+        <section id="character-profile">
+            <h2>Karbel</h2>
+            <figure>
+                <img class="all-images" src="images/1702406305.kagiroshi_sheol_min.png" alt="Karbel в профиль">
+                <figcaption>А это типа подпись картинки, хз как будет сотрудничать с alt</figcaption>
+            </figure>
+            <h3>Характеристики</h3>
+            <ul>
+                <li>Интеллект     <strong>15</strong></li>
+                <li>Ловкость     <strong>15</strong></li>
+                <li>Сила     <strong>15</strong></li>
+            </ul>
+        </section>
+        <article>
+            <p>Жил-был Карбел в обычном современном городе. Однажды он, в ничем не примечательный день, неспеша прогуливался по улице,
+                почти полностью погружённый в свои мысли. Всё вокруг было привычным, <em>обыденным</em>. Однако в доселе знакомой улице
+                он переферийно заметил необычное мерцание, некое искажение пространства вокруг себя. Это воистину заставило его отстраниться 
+                от своих дум, дабы воочию убедиться всё ли с ним в порядке и что вокруг происходит. Быстро осмотревшись он заметил, что 
+                вокруг нет никого - улицы пусты. Засим он заметил, как эти искажения вьются каскадно, стремятся в какую-то сторону, к какой-то 
+                точке. Он решил проследовать за этими мнимыми "узорами", отчего через пару десятков шагов смог лицезреть... <em>портал</em>...
+                Это слово было первым пришедшим ему на ум при виде сего явления. Сомнений не было, особенно при виде того, как листва под 
+                дуновением ветра влетала в искажённое пространство, легко укладываясь на необычного вида... землю..? Карбел осмотрелся и, 
+                не долго думая, ступил сквозь эту аномалию... Именно так и начинает повествовать Карбел каждый раз, когда у него вопрошают 
+                о появлении его рогов.
+            </p>
+        </article>
+        <section id="editor">
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Личные данные</legend>
+                    <label>Имя персонажа: <input type="text" placeholder="Карбел" required value="Карбел"></label>
+                    <label>Возраст героя: <input type="number" placeholder="18" required min="18" max="1000"></label>
+                </fieldset>
+                <fieldset>
+                    <legend>Выбор пути</legend>
+                    <label for="mood">Мировоззрение: 
+                        <select name="char-mood" id="mood" required>
+                            <optgroup label="Добро: ">
+                                <option value="good-good">Законный</option>
+                                <option value="good-neutral">Нейтральный</option>
+                                <option value="good-chaotic">Хаотичный</option>
+                            </optgroup>
+                            <optgroup label="Зло: ">
+                                <option value="evil-good">Законный</option>
+                                <option value="evil-neutral">Нейтральный</option>
+                                <option value="evil-chaotic">Хаотичный</option>
+                            </optgroup>
+                        </select>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Способности</legend>
+                    <h3>Главная стихия:</h3>
+                    <label>Огонь<input type="radio" name="element" required value="fire"></label>
+                    <label>Земля<input type="radio" name="element" required value="earth"></label>
+                    <label>Вода<input type="radio" name="element" required value="water"></label>
+                    <label>Воздух<input type="radio" name="element" required value="air"></label>
+                    <h3>Дополнительные навыки:</h3>
+                    <label>Скрытность<input type="checkbox" name="extra" value="stealth"></label>
+                    <label>Алхимия<input type="checkbox" name="extra" value="alchemy"></label>
+                    <label>Кузнечное дело<input type="checkbox" name="extra" value="blacksmith"></label>
+                </fieldset>
+                <fieldset>
+                    <legend>Дополнительно</legend>
+                    <label>Примечание для мастера: <textarea name="info" rows="3" cols="21" placeholder="Изумительное изречение, если, конечно, необходимо"></textarea></label>
+                </fieldset>
+                <button type="submit">Принять изменения</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>Игра на стадии идеи. Вполне возможно, что вовсе не выйдет, но кто знает...</p>
+        <a href="https://github.com/Pre-Mystdwyse/learning-frontend">
+            <p>Угадай, куда ведёт эта ссылка?</p>
+        </a>
+    </footer>
+</body>
+</html>
