@@ -166,3 +166,37 @@ tr:hover {
     background-color: #29005e;
     box-shadow: 0 0 5px 5px #5b148a;
 }
+
+#rare-shop {
+    display: flex;
+    gap: 10px;
+}
+
+.shop-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #06961a;
+    margin: 10px;
+    color: #9007eb;
+    background-color: #28103d;
+}
+
+.art-name {
+    text-align: center;
+}
+
+.item-img {
+    align-self: center;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #740fb8;
+    box-shadow: 0 0 10px 5px #29005e;
+}
+
+.price {
+    margin: 20px;
+    text-align: center;
+    color: gold;
+}
