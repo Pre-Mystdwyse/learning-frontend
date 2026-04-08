@@ -6,7 +6,7 @@ body{
     background-color: #1d0a2e;
     color: #adafaf;
     font-family: "Tektur", sans-serif;
-    padding-top: 120px;
+    padding-top: 150px;
 }
 
 #character-profile {
@@ -97,6 +97,8 @@ header {
     top: 0;
     left: 0;
     width: 100%;
+    height: 150px;
+    gap: 40px;
 }
 
 nav {
@@ -178,9 +180,58 @@ tr:hover {
     flex-direction: column;
     padding: 20px;
     border: 1px solid #06961a;
-    margin: 10px;
+    margin: 30px;
     color: #9007eb;
     background-color: #28103d;
+    position: relative;
+}
+
+.shop-item::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    height: 3px;
+    background: #09ff00;
+    margin: -3px auto;
+    box-shadow: 0 #00ff22;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: all 0.3s ease-out;
+}
+
+.shop-item:hover::after {
+    transform: scaleX(1);
+    box-shadow: 0 0 20px 3px #00ff22;
+    background: #09ff00;
+}
+
+.shop-item::before {
+    content: "";
+    font-size: small;
+    position: absolute;
+    padding: 10px;
+    border: 2px solid #8809dd;
+    border-radius: 20px;
+    color: #dd88ff;
+    background-color: #29005e;
+    box-shadow: 0 0 5px 5px #5b148a;
+    top: -15px;
+    right: -20px;
+}
+
+#basilisk::before {
+    content: "не смотри в глаз, сука";
+}
+
+#hat::before {
+    content: "дарует умение колдовать дробовик";
+}
+
+#rage-brows::before {
+    content: "ЪЪУУАЮДЖПВРРРРААЪ";
 }
 
 .art-name {
