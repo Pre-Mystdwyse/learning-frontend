@@ -1,0 +1,284 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #1d0a2e;
+    color: #adafaf;
+    font-family: "Tektur", sans-serif;
+    padding-top: 150px;
+}
+
+#character-profile {
+    background-color: rgba(52, 14, 87, 0.548);
+    border: 2px solid #06961a;
+    max-width: 600px;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(71, 131, 74, 0.5);
+    position: relative;
+}
+
+#character-profile::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    border: 1px solid #83da8e;
+    opacity: 0.3;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+#character-profile:hover::after {
+    opacity: 1;
+}
+
+.all-images {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2 {
+    color: #249e34;
+    font-size: 2.5rem;
+}
+
+h1 {
+    margin: 0;
+    width: fit-content;
+}
+
+header h1::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #09ff00;
+    margin: -3px auto;
+    box-shadow: 0 0 20px 5px;
+}
+
+article p:first-of-type {
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #5c9764;
+    transition: all 0.3s ease-in-out;
+    will-change: transform;
+}
+
+a:hover {
+    color: #00ff22;
+}
+
+nav a:hover {
+    transform: scale(1.1) translateY(-3px);
+}
+
+header {
+    z-index: 1000;
+    padding: 10px;
+    border: 2px solid #06961a;
+    background-color: #2a0d45;
+    box-shadow: 0 5px 10px rgba(71, 131, 74, 0.5);
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    gap: 40px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    cursor: pointer;
+    background-color: #116b1d;
+    border: 2px solid rgba(49, 109, 52, 0.5);
+    color: #043102;
+    transition: all 0.2s ease-in-out;
+    will-change: transform;
+}
+
+button:hover {
+    background-color: #00ff22;
+    color: #1d0a2e;
+    box-shadow: 0 0 15px #83da8e;
+    border-radius: 5px;
+}
+
+button:active {
+    transform: scale(0.9);
+    background-color: #06961a;
+    border: 2px solid #00ff22;
+    box-shadow: 0 0 20px #00ff22;
+    border-radius: 5px;
+    color: #7b19bd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    border: 2px solid #8809dd;
+    border-radius: 20px;
+    color: #dd88ff;
+    background-color: #29005e;
+    box-shadow: 0 0 5px 5px #5b148a;
+}
+
+#rare-shop {
+    display: flex;
+    gap: 10px;
+}
+
+.shop-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #06961a;
+    margin: 30px;
+    color: #9007eb;
+    background-color: #28103d;
+    position: relative;
+}
+
+.shop-item::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    height: 3px;
+    background: #09ff00;
+    margin: -3px auto;
+    box-shadow: 0 #00ff22;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: all 0.3s ease-out;
+}
+
+.shop-item:hover::after {
+    transform: scaleX(1);
+    box-shadow: 0 0 20px 3px #00ff22;
+    background: #09ff00;
+}
+
+.shop-item::before {
+    content: "";
+    font-size: small;
+    position: absolute;
+    padding: 10px;
+    border: 2px solid #8809dd;
+    border-radius: 20px;
+    color: #dd88ff;
+    background-color: #29005e;
+    box-shadow: 0 0 5px 5px #5b148a;
+    top: -15px;
+    right: -20px;
+}
+
+#basilisk::before {
+    content: "не смотри в глаз, сука";
+}
+
+#hat::before {
+    content: "дарует умение колдовать дробовик";
+}
+
+#rage-brows::before {
+    content: "ЪЪУУАЮДЖПВРРРРААЪ";
+}
+
+.art-name {
+    text-align: center;
+}
+
+.item-img {
+    align-self: center;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #740fb8;
+    box-shadow: 0 0 10px 5px #29005e;
+}
+
+.price {
+    margin: 20px;
+    text-align: center;
+    color: gold;
+}
+
+#karbels-arsenal {
+    background: linear-gradient(73deg, #6019a1 35%, #00ff22);
+    background-clip: text;
+    color: transparent;
+}
+
+th {
+    background-color: #6019a1;
+}
+
+tr {
+    border-bottom: 1px solid #444;
+    background-color: #1f0735;
+}
+
+tr:nth-child(even) {
+    background-color: #2d0a4d;
+}
+
+tr:hover {
+    background-color: #32193b;
+}
+
+td:nth-child(n+3)::after {
+    content: "★";
+    padding-left: 10px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    will-change: transform;
+}
+
+tr:hover td:nth-child(n+3)::after {
+    transform: scale(1.5) rotate(15deg);
+    color: #00ff22;
+    text-shadow: 0 0 10px #00ff22;
+}
+
