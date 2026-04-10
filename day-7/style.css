@@ -1,0 +1,348 @@
+:root {
+    --main-bg: #1d0a2e;
+    --items-bg: #2a0d45;
+    --neon-green: #00ff22;
+    --text-gray: #adafaf;
+    --gold: gold;
+    --borders-green: #06961a;
+    --text-green: #249e34;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--main-bg);
+    color: var(--text-gray);
+    font-family: "Tektur", sans-serif;
+    padding-top: 150px;
+}
+
+#character-profile {
+    background-color: var(--items-bg);
+    border: 2px solid var(--borders-green);
+    max-width: 600px;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(71, 131, 74, 0.5);
+    position: relative;
+}
+
+#character-profile::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    border: 1px solid var(--neon-green);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px 10px #0b5c16;
+}
+
+#character-profile:hover::after {
+    opacity: 1;
+}
+
+.all-images {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2 {
+    color: var(--text-green);
+    font-size: 2.5rem;
+}
+
+h1 {
+    margin: 0;
+    width: fit-content;
+    position: relative;
+}
+
+#karbels-arsenal {
+    background: linear-gradient(73deg, #6019a1 35%, #00ff22);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+header h1::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--neon-green);
+    bottom: 2px;
+    box-shadow: 0 0 20px 5px #249e34;
+    position: absolute;
+}
+
+article p:first-of-type {
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #5c9764;
+    transition: all 0.3s ease-in-out;
+    will-change: transform;
+}
+
+a:hover {
+    color: var(--neon-green);
+}
+
+nav a:hover {
+    transform: scale(1.1) translateY(-3px);
+}
+
+header {
+    z-index: 1000;
+    padding: 10px;
+    border: 2px solid #06961a;
+    background-color: var(--items-bg);
+    box-shadow: 0 5px 10px rgba(71, 131, 74, 0.5);
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    gap:40px;
+}
+
+nav {
+    display: flex;
+    gap:20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    cursor: pointer;
+    background-color: #116b1d;
+    border: 2px solid rgba(49, 109, 52, 0.5);
+    color: #043102;
+    transition: all 0.2s ease-in-out;
+    will-change: transform;
+}
+
+button:hover {
+    background-color: var(--neon-green);
+    color: #1d0a2e;
+    box-shadow: 0 0 15px #83da8e;
+    border-radius: 5px;
+}
+
+button:active {
+    transform: scale(0.9);
+    background-color: #06961a;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 20px var(--neon-green);
+    border-radius: 5px;
+    color: #7b19bd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    border: 2px solid #8809dd;
+    border-radius: 20px;
+    color: #dd88ff;
+    background-color: #29005e;
+    box-shadow: 0 0 5px 5px #5b148a;
+}
+
+#rare-shop {
+    display: flex;
+    gap: 10px;
+}
+
+.shop-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #06961a;
+    margin: 30px;
+    color: #9007eb;
+    background-color: #28103d;
+    position: relative;
+}
+
+.shop-item::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    height: 3px;
+    background: var(--neon-green);
+    margin: -3px auto;
+    box-shadow: 0 var(--neon-green);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: all 0.3s ease-out;
+}
+
+.shop-item:hover::after {
+    transform: scaleX(1);
+    box-shadow: 0 0 20px 3px var(--neon-green);
+    background: var(--neon-green);
+}
+
+.shop-item::before {
+    content: "";
+    font-size: small;
+    position: absolute;
+    padding: 10px;
+    border: 2px solid #8809dd;
+    border-radius: 20px;
+    color: #dd88ff;
+    background-color: #29005e;
+    box-shadow: 0 0 5px 5px #5b148a;
+    top: -15px;
+    right: -20px;
+}
+
+#basilisk::before {
+    content: "не смотри в глаз, сука";
+}
+
+#hat::before {
+    content: "дарует умение колдовать дробовик";
+}
+
+#rage-brows::before {
+    content: "ЪЪУУАЮДЖПВРРРРААЪ";
+}
+
+.art-name {
+    text-align: center;
+}
+
+.item-img {
+    align-self: center;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #740fb8;
+    box-shadow: 0 0 10px 5px #29005e;
+}
+
+.price {
+    margin: 20px;
+    text-align: center;
+    color: var(--gold);
+}
+
+th {
+    background-color: #6019a1;
+}
+
+tr {
+    border-bottom: 1px solid #444;
+    background-color: #1f0735;
+}
+
+tr:nth-child(even) {
+    background-color: #2d0a4d;
+}
+
+tr:hover {
+    background-color: #32193b;
+}
+
+td:nth-child(n+3)::after {
+    content: "★";
+    padding-left: 10px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    will-change: transform;
+}
+
+tr:hover td:nth-child(n+3)::after {
+    transform: scale(1.5) rotate(15deg);
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+#card-art {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* определяем 2 колонки ровной ширины. 1fr = одна дробная часть */
+    gap: 30px;
+    position: relative;
+    margin: 30px;
+}
+
+.quest-card {
+    border: 2px solid var(--borders-green);
+    display: flex;
+    flex-direction: column;
+
+}
+
+.img-box {
+    
+}
+
+@media (max-width: 768px) {
+    h1, h2 {
+        font-size: 1.8rem;
+    }
+
+    header {
+        height: 90px;
+        gap: 10px;
+    }
+
+     #character-profile {
+        max-width: 370px;
+     }
+
+     body {
+        padding-top: 100px;
+     }
+
+     #rare-shop {
+        flex-direction: column;
+     }
+
+     .shop-item {
+        margin: 25px;
+     }
+
+     .table-wrapper {
+        overflow-x: auto;
+     }
+}
