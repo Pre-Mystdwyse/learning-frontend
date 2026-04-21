@@ -235,6 +235,10 @@ th, td {
     right: -20px;
 }
 
+.git {
+    display: inline-block;
+}
+
 #basilisk::before {
     content: "не смотри в глаз, сука";
 }
@@ -305,11 +309,156 @@ tr:hover td:nth-child(n+3)::after {
     margin: 30px;
 }
 
+.img-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-logic {
+    display: none;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-logic:checked ~ .modal-overlay {
+    display: flex;
+}
+
+.modal-content {
+    display: flex;
+    border: 2px solid var(--neon-green);
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 700px;
+    background: #1f0835;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0 0 10px 2px #06961a;
+}
+
+.modal-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+
+.modal-content>p {
+    text-align: center;
+}
+
+.modal-content>h3 {
+    color: var(--text-green);
+}
+
+.quest-card>h3 {
+    color: var(--text-green);
+}
+
+.reward {
+    margin-top: 20px;
+    margin-bottom: -10px;
+    color: var(--gold);
+}
+
+.open-button {
+    margin: 20px;
+    border: 1px solid #00ff22;
+    padding: 2px;
+    background-color: #043102;
+    border-radius: 3px;
+    box-shadow: 0 0 20px -5px #00ff22;
+    will-change: auto;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    /* важно писать это, чтобы при увеличении рамки или отступов
+    не происходило увеличение коробки, сдвигающей остальные элементы */
+}
+
+.open-button:hover {
+    background-color: #0c7a1b;
+    box-shadow: 0 0 20px 0 #00ff22;
+}
+
 .quest-card {
     border: 2px solid var(--borders-green);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    background: var(--items-bg);
+    position: relative;
+}
 
+.quest-card::before {
+    content: "";
+    font-size: small;
+    position: absolute;
+    border: 2px solid #8809dd;
+    top: -15px;
+    right: -20px;
+    padding: 10px;
+    border-radius: 20px;
+    color: #dd88ff;
+    background-color: #29005e;
+    box-shadow: 0 0 5px 5px #5b148a;
+}
+
+#q-hunt::before {
+    content: "Средне";
+    border-color: #d1d406;
+    box-shadow: 0 0 5px 5px #737506;
+    background-color: #7e6c0a;
+    color: #ff9900;
+}
+
+#q-find::before {
+    content: "Средне";
+    border-color: #d1d406;
+    box-shadow: 0 0 5px 5px #737506;
+    background-color: #7e6c0a;
+    color: #ff9900;
+}
+
+#q-research::before {
+    content: "Сложно";
+    border-color: #d40606;
+    box-shadow: 0 0 5px 5px #750606;
+    background-color: #7e0a0a;
+    color: #ff0000;
+}
+
+#q-help::before {
+    content: "Легко";
+    border-color: #40d406;
+    box-shadow: 0 0 5px 5px #137506;
+    background-color: #147e0a;
+    color: #33ff00;
+}
+
+.accept-button {
+    margin-bottom: 15px;
+    width: 95%;
+}
+
+.quest-card::after {
+    content: "";
+    
 }
 
 @media (max-width: 768px) {
