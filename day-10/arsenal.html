@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Арсенал</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 id="karbels-arsenal">Арсенал Карбела</h1>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="quest.html">Квесты</a>
+            <a href="#">Об игре</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Имеющееся вооружение</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Тип</th>
+                            <th>Мощь</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ясеневый жезл</td>
+                            <td>Магия</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>Двуручный меч</td>
+                            <td>Ближний бой</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>Охотничий лук</td>
+                            <td>Дальний бой</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Щит</td>
+                            <td>Ближний бой</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Парные кинжалы</td>
+                            <td>Ближний бой</td>
+                            <td>4*2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section id="rare-shop">
+            <article id="basilisk" class="shop-item">
+                <h3 class="art-name">Око василиска</h3>
+                <img class="item-img" src="images/arsenal/trades/basilisk.jpg" alt="Око василиска на стенде">
+                <span class="price">500 Золотых</span>
+                <button class="btn-trade">Купить</button>
+            </article>
+            <article id="hat" class="shop-item">
+                <h3 class="art-name">Тактическая шляпа архимага</h3>
+                <img class="item-img" src="images/arsenal/trades/tactical_hat.jpg" alt="Многофункциональная тактическая шляпа архимага">
+                <span class="price">500 Золотых</span>
+                <button class="btn-trade">Купить</button>
+            </article>
+            <article id="rage-brows" class="shop-item">
+                <h3 class="art-name">Брови ярости</h3>
+                <img class="item-img" src="images/arsenal/trades/rage_brows.png" alt="Весьма густые брови, дающие владельцу не только 
+                ярость берсерка, но и своеобразный имидж">
+                <span class="price">500 Золотых</span>
+                <button class="btn-trade">Купить</button>
+            </article>
+        </section>
+        <section id="forge">
+            <h2>Добавить предмет в кузницу</h2>
+            <form action="#" method="post">
+                <label for="weapon-name">Название оружия: </label>
+                <input type="text" id="weapon-name" required>
+                <label for="weapon-rare">Редкость оружия:</label>
+                <select name="rare" id="weapon-rare" required >
+                    <option value="common">Обычный</option>
+                    <option value="rare">Редкий</option>
+                    <option value="mythic">Мифический</option>
+                </select>
+                <button type="submit">Выковать</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>Игра на стадии идеи. Вполне возможно, что вовсе не выйдет, но кто знает...</p>
+        <a class="git" href="https://github.com/Pre-Mystdwyse/learning-frontend">
+            <p>Угадай, куда ведёт эта ссылка?</p>
+        </a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,544 @@
+:root {
+    --main-bg: #1d0a2e;
+    --items-bg: #2a0d45;
+    --neon-green: #00ff22;
+    --text-gray: #adafaf;
+    --gold: gold;
+    --borders-green: #06961a;
+    --text-green: #249e34;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--main-bg);
+    color: var(--text-gray);
+    font-family: "Tektur", sans-serif;
+    padding-top: 150px;
+}
+
+#character-profile {
+    background-color: var(--items-bg);
+    border: 2px solid var(--borders-green);
+    max-width: 600px;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(71, 131, 74, 0.5);
+    position: relative;
+}
+
+#character-profile::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    border: 1px solid var(--neon-green);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px 10px #0b5c16;
+}
+
+#character-profile:hover::after {
+    opacity: 1;
+}
+
+.all-images {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2 {
+    color: var(--text-green);
+    font-size: 2.5rem;
+}
+
+h1 {
+    margin: 0;
+    width: fit-content;
+    position: relative;
+}
+
+#karbels-arsenal {
+    background: linear-gradient(73deg, #6019a1 35%, #00ff22);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+header h1::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--neon-green);
+    bottom: 2px;
+    box-shadow: 0 0 20px 5px #249e34;
+    position: absolute;
+}
+
+article p:first-of-type {
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #5c9764;
+    transition: all 0.3s ease-in-out;
+    will-change: transform;
+}
+
+a:hover {
+    color: var(--neon-green);
+}
+
+nav a:hover {
+    transform: scale(1.1) translateY(-3px);
+}
+
+header {
+    z-index: 1000;
+    padding: 10px;
+    border: 2px solid #06961a;
+    background-color: var(--items-bg);
+    box-shadow: 0 5px 10px rgba(71, 131, 74, 0.5);
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    gap:40px;
+}
+
+nav {
+    display: flex;
+    gap:20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    cursor: pointer;
+    background-color: #116b1d;
+    border: 2px solid rgba(49, 109, 52, 0.5);
+    color: #043102;
+    transition: all 0.2s ease-in-out;
+    will-change: transform;
+}
+
+button:hover {
+    background-color: var(--neon-green);
+    color: #1d0a2e;
+    box-shadow: 0 0 15px #83da8e;
+    border-radius: 5px;
+}
+
+button:active {
+    transform: scale(0.9);
+    background-color: #06961a;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 20px var(--neon-green);
+    border-radius: 5px;
+    color: #7b19bd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    border: 2px solid #8809dd;
+    border-radius: 20px;
+    color: #dd88ff;
+    background-color: #29005e;
+    box-shadow: 0 0 5px 5px #5b148a;
+}
+
+#rare-shop {
+    display: flex;
+    gap: 10px;
+}
+
+.shop-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #06961a;
+    margin: 30px;
+    color: #9007eb;
+    background-color: #28103d;
+    position: relative;
+}
+
+.shop-item::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    height: 3px;
+    background: var(--neon-green);
+    margin: -3px auto;
+    box-shadow: 0 var(--neon-green);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: all 0.3s ease-out;
+}
+
+.shop-item:hover::after {
+    transform: scaleX(1);
+    box-shadow: 0 0 20px 3px var(--neon-green);
+    background: var(--neon-green);
+}
+
+.shop-item::before {
+    content: "";
+    font-size: small;
+    position: absolute;
+    padding: 10px;
+    border: 2px solid #8809dd;
+    border-radius: 20px;
+    color: #dd88ff;
+    background-color: #29005e;
+    box-shadow: 0 0 5px 5px #5b148a;
+    top: -15px;
+    right: -20px;
+}
+
+.git {
+    display: inline-block;
+}
+
+#basilisk::before {
+    content: "не смотри в глаз, сука";
+}
+
+#hat::before {
+    content: "дарует умение колдовать дробовик";
+}
+
+#rage-brows::before {
+    content: "ЪЪУУАЮДЖПВРРРРААЪ";
+}
+
+.art-name {
+    text-align: center;
+}
+
+.item-img {
+    align-self: center;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #740fb8;
+    box-shadow: 0 0 10px 5px #29005e;
+    will-change: transform, box-shadow;
+    transition: all 0.3s ease-in-out;
+    margin-top: 5px;
+}
+
+.price {
+    margin: 20px;
+    text-align: center;
+    color: var(--gold);
+}
+
+th {
+    background-color: #6019a1;
+}
+
+tr {
+    border-bottom: 1px solid #444;
+    background-color: #1f0735;
+}
+
+tr:nth-child(even) {
+    background-color: #2d0a4d;
+}
+
+tr:hover {
+    background-color: #32193b;
+}
+
+td:nth-child(n+3)::after {
+    content: "★";
+    padding-left: 10px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    will-change: transform;
+}
+
+tr:hover td:nth-child(n+3)::after {
+    transform: scale(1.5) rotate(15deg);
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+#card-art {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* определяем 2 колонки ровной ширины. 1fr = одна дробная часть */
+    gap: 30px;
+    position: relative;
+    margin: 30px;
+}
+
+.img-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-logic {
+    display: none;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-logic:checked ~ .modal-overlay {
+    display: flex;
+}
+
+.modal-content {
+    display: flex;
+    border: 2px solid var(--neon-green);
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 700px;
+    background: #1f0835;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0 0 10px 2px #06961a;
+}
+
+.modal-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+
+.modal-content>p {
+    text-align: center;
+}
+
+.modal-content>h3 {
+    color: var(--text-green);
+}
+
+.quest-card>h3 {
+    color: var(--text-green);
+}
+
+.reward {
+    margin-top: 20px;
+    margin-bottom: -10px;
+    color: var(--gold);
+}
+
+.open-button {
+    margin: 20px;
+    border: 1px solid #00ff22;
+    padding: 2px;
+    background-color: #043102;
+    border-radius: 3px;
+    box-shadow: 0 0 20px -5px #00ff22;
+    will-change: auto;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    /* важно писать это, чтобы при увеличении рамки или отступов
+    не происходило увеличение коробки, сдвигающей остальные элементы */
+}
+
+.open-button:hover {
+    background-color: #0c7a1b;
+    box-shadow: 0 0 20px 0 #00ff22;
+}
+
+.quest-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    will-change: all;
+    background: linear-gradient(
+        30deg,
+        var(--items-bg) 50%,
+        rgb(from var(--difficulty-color) r g b / 0.5) 100%) padding-box,
+        linear-gradient(
+        30deg,
+        var(--borders-green) 50%,
+        var(--difficulty-color) 100%) border-box;
+    background-size: 251% 251%, 501% 501%;
+    background-clip: padding-box, border-box;
+    transition: all 0.3s ease-in-out;
+    border: 4px solid transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px var(--items-bg);
+}
+
+.quest-card::before {
+    content: "";
+    font-size: small;
+    position: absolute;
+    border: 2px solid #8809dd;
+    top: -15px;
+    right: -20px;
+    padding: 10px;
+    border-radius: 20px;
+    color: #dd88ff;
+    background-color: #29005e;
+    box-shadow: 0 0 5px 5px #5b148a;
+}
+
+#q-hunt::before {
+    content: "Средне";
+    border-color: #d1d406;
+    box-shadow: 0 0 5px 5px #737506;
+    background-color: #7e6c0a;
+    color: #ff9900;
+}
+
+#q-find::before {
+    content: "Средне";
+    border-color: #d1d406;
+    box-shadow: 0 0 5px 5px #737506;
+    background-color: #7e6c0a;
+    color: #ff9900;
+}
+
+#q-research::before {
+    content: "Сложно";
+    border-color: #d40606;
+    box-shadow: 0 0 5px 5px #750606;
+    background-color: #7e0a0a;
+    color: #ff0000;
+}
+
+#q-help::before {
+    content: "Легко";
+    border-color: #40d406;
+    box-shadow: 0 0 5px 5px #137506;
+    background-color: #147e0a;
+    color: #33ff00;
+}
+
+.accept-button {
+    margin-bottom: 15px;
+    width: 95%;
+}
+
+.quest-card::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 10px;
+    bottom: -10px;
+    z-index: -1;
+    background: #043102;
+    border: 2px solid #06961a;
+}
+
+#q-find::after {
+    content: "";
+    background: linear-gradient(to right, var(--neon-green) 18%, #043102 21%);
+}
+
+#q-research::after {
+    content: "";
+    background: linear-gradient(to right, var(--neon-green) 70%, #043102 73%);
+}
+
+.item-img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px 5px #3c008b;
+}
+
+.quest-card:hover::before {
+    transform: rotate(15deg);
+}
+
+.quest-card:hover {
+    background-size: 124% 124%, 100% 100%;
+}
+
+@media (max-width: 768px) {
+    h1, h2 {
+        font-size: 1.8rem;
+    }
+
+    header {
+        height: 90px;
+        gap: 10px;
+    }
+
+     #character-profile {
+        max-width: 370px;
+     }
+
+     body {
+        padding-top: 100px;
+     }
+
+     #rare-shop {
+        flex-direction: column;
+     }
+
+     #card-art {
+        grid-template-columns: 1fr;
+        margin: 10px;
+     }
+
+     .shop-item {
+        margin: 25px;
+     }
+
+     .table-wrapper {
+        overflow-x: auto;
+     }
+}

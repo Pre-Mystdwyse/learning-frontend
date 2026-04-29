@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контракты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+    <body>
+        <header>
+            <h1 id="h1-quests">Квесты</h1>
+            <nav>
+                <a href="arsenal.html">Арсенал</a>
+                <a href="index.html">Главная</a>
+                <a href="#">Об игре</a>
+            </nav>
+        </header>
+        <main>
+            <h2 id="avialable-quests">Доступные квесты</h2>
+            <section id="card-art">
+                <article id="q-hunt" class="quest-card" style="--difficulty-color: #d1d406">
+                    <h3>Уничтожение зверя</h3>
+                    <strong class="target">Разъярённая Урса</strong>
+                    <strong class="reward">Награда:</strong>
+                    <div class="img-box">
+                        <img class="item-img" src="images/quests/rewards/AK47.png" alt="Несокрушимое оружие">
+                    </div>
+                    <input type="checkbox" class="modal-logic" id="modal-l1">
+                    <label for="modal-l1" class="open-button">Подробнее</label>
+                    <div class="modal-overlay">
+                        <label for="modal-l1" class="modal-background"></label>
+                        <div class="modal-content">
+                            <h3>Выследить и убить</h3>
+                            <p>На окраине деревни Оукридж есть лес с небольшими скалами внутри. в одной из них есть пещера, по виду которой сразу будет ясно, что она занята опасным хищником. Конкретно этот зверь - Урса. Не смотря на то, что она появилась в этом лесу не так давно, но уже начала весомо терроризировать местных обитателей... по крайней мере тех, кто смог сбежать. Будь уверен, что этот зверь не желает знать значения слова "компромисс".</p>
+                        </div>
+                    </div>
+                    <button class="accept-button">Приступить</button>
+                </article>
+                <article id="q-find" class="quest-card" style="--difficulty-color: #d1d406">
+                    <h3>Поиск порталов</h3>
+                    <strong class="target">Очевидно порталы</strong>
+                    <strong class="reward">Награда:</strong>
+                    <div class="img-box">
+                        <img class="item-img" src="images/quests/rewards/ArgonCrystal.png" alt="Чистый аргон, замороженный магией">
+                        <img class="item-img" src="images/quests/rewards/blender.png" alt="СОЗДАЙ СВОЙ 3D МИР!">
+                    </div>
+                    <input type="checkbox" class="modal-logic" id="modal-l2">
+                    <label for="modal-l2" class="open-button">Подробнее</label>
+                    <div class="modal-overlay">
+                        <label for="modal-l2" class="modal-background"></label>
+                        <div class="modal-content">
+                            <h3>Три-девятое не за горами</h3>
+                            <p>В этом мире порталы - это обыденность, но почти столь же и редкость. Большинство из таковых соединяют два места этого мира, но есть и иные, соединяющие этот мир с другими. Как раз-таки они и являются наиболее важными, ибо могут быть как просто завораживающим местом, так и представлять опасность, в основном, из-за обитателей мест на другом входе. Однако эти порталы не появляются спонтанно, если быть достаточно внимательным к потоку магии.</p>
+                        </div>
+                    </div>
+                    <button class="accept-button">Приступить</button>
+                </article>
+                <article id="q-research" class="quest-card" style="--difficulty-color: #d40606">
+                    <h3>Изучение аномалий</h3>
+                    <strong class="target">Концентрация эфира</strong>
+                    <strong class="reward">Награда:</strong>
+                    <div class="img-box">
+                        <img class="item-img" src="images/quests/rewards/ion_cube.png" alt="Магическая энергия, которую проще использовать для технологий">
+                        <img class="item-img" src="images/quests/rewards/Kuva.png" alt="Некогда часть Человека-в-стене... Он до сих пор недоволен">
+                        <img class="item-img" src="images/quests/rewards/kyanite.png" alt="Резонирующий кристалл">
+                    </div>
+                    <input type="checkbox" class="modal-logic" id="modal-l3">
+                    <label for="modal-l3" class="open-button">Подробнее</label>
+                    <div class="modal-overlay">
+                        <label for="modal-l3" class="modal-background"></label>
+                        <div class="modal-content">
+                            <h3>В эфире</h3>
+                            <p>Как известно, в этом мире есть магия, а значит есть и мана, необходимая для сотворения заклинаний, является неким неиссякаемым источником энергии, ветающем вокруг. Однако не так давно было обнаружено, что существует ещё более мощный источник энергии - эфир. Хоть он и так же неисчерпаем, теоретически, но им не пропитано всё пространство. В основном, он проявляется спонтанно в случайных местах, концентрируясь в одном месте. На данный момент всё ещё не известно зачем и почему происходят такие скопления эфира, ибо через некоторое время, когда концентрация эфира достигает около 42% относительно маны, эфирный "пузырь" лопается, разлетаясь на внушительное расстояние, отчего все маги в области чувствуют присутствие эфира. Нужно изучить эти проявления и, как минимум, выдвинуть весомое предположение почему происходят такие скопления эфира.</p>
+                        </div>
+                    </div>
+                    <button class="accept-button">Приступить</button>
+                </article>
+                <article id="q-help" class="quest-card" style="--difficulty-color: #40d406">
+                    <h3>Помощь магией</h3>
+                    <strong class="target">Укрепление вооружения</strong>
+                    <strong class="reward">Награда:</strong>
+                    <div class="img-box">
+                        <img class="item-img" src="images/quests/rewards/magnetite.png" alt="Магнит + магия">
+                        <img class="item-img" src="images/quests/rewards/riven_crystal.png" alt="Осколок энерго-кристалла из мира за порталом">
+                        <img class="item-img" src="images/quests/rewards/sentient_bow.png" alt="Лук владеющих разумом. Иная магия, иная технология">
+                        <img class="item-img" src="images/quests/rewards/venka.png" alt="Напоминают о способности Фенрира">
+                    </div>
+                    <input type="checkbox" class="modal-logic" id="modal-l4">
+                    <label for="modal-l4" class="open-button">Подробнее</label>
+                    <div class="modal-overlay">
+                        <label for="modal-l4" class="modal-background"></label>
+                        <div class="modal-content">
+                            <h3>Железо мы куём</h3>
+                            <p>Вооружение из обычных материалов, как например, сталь - армейский стандарт. Но, как говорится: "нет предела совершенству", отчего давно практикуется зачарование снаряжения магией. На сей же раз было придумано новое вооружение, отчего требуется проявить креативность и в магической части - подобрать оптимальные зачарования.</p>
+                        </div>
+                    </div>
+                    <button class="accept-button">Приступить</button>
+                </article>
+            </section>
+            <footer>
+                <p>Игра на стадии идеи. Вполне возможно, что вовсе не выйдет, но кто знает...</p>
+                <a class="git" href="https://github.com/Pre-Mystdwyse/learning-frontend">
+                    <p>Угадай, куда ведёт эта ссылка?</p>
+                </a>
+            </footer>
+        </main>
+    </body>
+</html>
