@@ -400,6 +400,7 @@ tr:hover td:nth-child(n+3)::after {
 }
 
 .quest-card {
+    height: 99%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -413,12 +414,11 @@ tr:hover td:nth-child(n+3)::after {
         30deg,
         var(--borders-green) 50%,
         var(--difficulty-color) 100%) border-box;
-    background-size: 251% 251%, 501% 501%;
+    background-size: 251% 251%, 510% 510%;
     background-clip: padding-box, border-box;
     transition: all 0.3s ease-in-out;
     border: 4px solid transparent;
     border-radius: 5px;
-    box-shadow: 0 0 0 1px var(--items-bg);
 }
 
 .quest-card::before {
@@ -433,6 +433,8 @@ tr:hover td:nth-child(n+3)::after {
     color: #dd88ff;
     background-color: #29005e;
     box-shadow: 0 0 5px 5px #5b148a;
+    will-change: all;
+    transition: all 0.2s ease-in-out;
 }
 
 #q-hunt::before {
@@ -500,11 +502,24 @@ tr:hover td:nth-child(n+3)::after {
 }
 
 .quest-card:hover::before {
-    transform: rotate(15deg);
+    transform: rotate(7deg) scale(1.1) translate(-10px, 5px);
 }
 
 .quest-card:hover {
-    background-size: 124% 124%, 100% 100%;
+    background-size: 124% 124%, 110% 110%;
+}
+
+#gold {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    box-sizing: border-box;
+    color: var(--gold);
+}
+
+#img-coins {
+    height: 20px;
+    width: 20px;
 }
 
 @media (max-width: 768px) {
