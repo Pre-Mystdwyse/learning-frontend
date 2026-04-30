@@ -1,44 +1,51 @@
-let currentGold = 1000;
-const gold = document.querySelector('#gold-count');
+
+const currentGold = document.querySelector('#gold-count');
 const btn = document.querySelectorAll('.btn-trade');
 
-btn.forEach(oneBtn => {
-    //в переменную oneBtn записываем элемент текущей итерации
-    oneBtn.addEventListener('click', () => {
-        if (currentGold >= 100) {
-            currentGold -= 100;
-            gold.textContent = currentGold;
-            console.log("Осталось золота: ", currentGold);
-        }
-        else {
-            console.log("Нужно больше золота!");
-        }
+let gold = parseInt(currentGold.textContent);
+
+trade(animatedGold); //простейший коллбек зачем-то
+
+function trade(callback) {
+    console.log(currentGold, gold)
+    btn.forEach(oneBtn => {
+        oneBtn.addEventListener('click', (event) => {
+            if (gold >= 500) {
+                gold -= 500;
+                // currentGold.textContent = gold;
+                console.log("Покупка совершена, остаток ", gold);
+                callback(gold);
+            }
+            else {
+                console.log("НУЖНО БОЛЬШЕ ЗОЛОТА!");
+            }
+        });
     });
-});
+}
 
-function animatedGold(targetValue) {
-    const goldElement = document.querySelector('#gold-count');
-    let currentValue = parseInt(goldElement.textContent);
-    //берём значение и преобразуем в числовое
-    const duration = 500; //длительность анимации считается в мс
-    const stepTime = 20;
+function animatedGold(targetGold) {     //принимаю значение, к которому нужно стремиться
+    const startGold = parseInt(currentGold.textContent);
+    const duration = 500;
+    let startTime = null;
 
-    //вычисляем сколько прибавить за 1 шаг
-    const steps = duration / stepTime;
-    const increment = (targetValue - currentValue) / steps;
+    function step(timestamp) {
+        //при вызове функции с помощью requestAnimationFrame в неё всегда
+        //будет подаваться текущее значение времени с момента запуска страницы
+        if (!startTime) startTime = timestamp;  //записываем время начала
+        //Math.min(..., 1) нужно для того, чтобы случайно не перескочить через
+        //максимально допустимое чило 1, выбирается наименьшее число из двух
+        const progress = Math.min((timestamp - startTime) / duration, 1);
 
-    const timer = setInterval(() => {
-        currentValue += increment;
+        //вычисляем промежуточное значение
+        const currentFrameValue = Math.floor(startGold - progress * (startGold - targetGold));
 
-        //если дошли до цели или перелетели, то останавливаемся
-        if ((increment > 0 && currentValue >= targetValue) ||
-        (increment < 0 && currentValue <= targetValue)) {
-            clearInterval(timer);
-            goldElement.textContent = targetValue; //ставим точное финальное число
+        //обновление текста
+        currentGold.textContent = currentFrameValue;
+
+        //если время не вышло - продолжаем
+        if (progress < 1) {
+            requestAnimationFrame(step);
         }
-        else {
-            //округляем, чтобы не было дробных чисел на экране
-            goldElement.textContent = Math.floor(currentValue);
-        }
-    }, stepTime);
+    }
+    requestAnimationFrame(step);
 }
