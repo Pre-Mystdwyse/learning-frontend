@@ -1,0 +1,15 @@
+# 1. По умолчанию Git сам определяет текстовые файлы и приводит их к LF в репозитории
+* text=auto eol=lf
+
+# 2. Жестко прописываем LF для паспорта проекта и исходного кода
+package.json text eol=lf
+package-lock.json text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+
+# 3. Указываем, что картинки и другие ресурсы — это бинарные файлы (их менять нельзя)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

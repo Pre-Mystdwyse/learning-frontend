@@ -6,7 +6,7 @@ function ShopItem({ item, onBuy }) {
             <h3>{item.name}</h3>
             <img className="item-img" src={item.img} alt={item.description} />
             <span className="price">{item.price} золота</span>
-            <button onClick={() => onBuy(item.price)}>Купить</button>
+            <button onClick={onBuy}>Купить</button>
         </article>
     );
 }

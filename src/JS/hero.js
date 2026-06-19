@@ -30,3 +30,19 @@ export function getHeroHistory() {
     console.log(heroHistory);
     return heroHistory.pop();
 }
+
+/*
+{
+    name: 'Кабрел',
+    gold: 10000,
+    inventory: [
+        {
+            name: '...',
+            price: ...,
+            img: "images/...",
+            description: '...',
+            id: ...
+        }
+    ]
+}
+*/
