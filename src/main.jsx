@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import './CSS/style.css'
 import ProfilePage from "./pages/ProfilePage"
+import ShopPage from "./pages/ShopPage"
+import QuestPage from "./pages/QuestPage"
 
 //сперва нужно создать объект маршрутизатора с путями
 const router = createBrowserRouter([

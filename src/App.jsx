@@ -1,7 +1,6 @@
 import React, { useState, useEffect, use } from "react";
 import { getHero, saveHero } from './JS/hero';
 import Header from "./components/Header";
-import ShopItem from "./components/ShopItem";
 import Inventory from "./components/Inventory";
 import { ITEMS } from "./js/items";
 import { BrowserRouter as Router, Routes, Route, Link, Outlet } from 'react-router-dom';
@@ -63,6 +62,9 @@ function App() {
         <div className="app">
             <Header hero={hero} />
             <main>
+                {/*Outlet нужен для того, чтобы сюда подставлялся необоходимый код
+                в зависимости отпути. это позволяет избежать перерендера того же
+                хедера и прочего на каждой странице, ведь суть реакта в одностраничности */}
                 <Outlet context={{ hero, buyItem, setHero, history, undo }} />
             </main>
         </div>
