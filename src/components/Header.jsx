@@ -1,6 +1,8 @@
-import React from "react";
+import { useHeroStore } from "../entities/hero/model/heroStore";
 
-function Header({ hero }) {
+function Header() {
+    const hero = useHeroStore((state) => state.hero);
+
     return (
         <header>
             <h1>Киберкринж (React Edition)</h1>

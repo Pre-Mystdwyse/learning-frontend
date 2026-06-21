@@ -1,4 +1,3 @@
-import React from "react";
 import { ITEMS } from "../JS/items";
 import ShopItem from "./ShopItem";
 
@@ -8,8 +7,7 @@ function RareShop() {
             {Object.entries(ITEMS).map(([key, itemData]) => (
                 <ShopItem
                 key={key}
-                item={itemData}
-                onBuy={() => handleBuy}
+                itemData={itemData}
                 />
             ))}
         </section>

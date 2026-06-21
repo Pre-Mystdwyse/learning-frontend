@@ -1,11 +1,10 @@
-import React from "react";
 import { useOutletContext } from 'react-router-dom';
 import { ITEMS } from '../JS/items'
 import RareShop from "../components/RareShop";
+import { useHeroHistory } from '../entities/hero/model/useHeroHistory';
 
 function ShopPage() {
-
-    // const handleBuy = 
+    const { undo, hasHistory } = useHeroHistory();
 
     return (
         <main>
@@ -68,7 +67,11 @@ function ShopPage() {
             <section id="inventory-section">
                 <h3 />
                 <ul id="inventory-list" />
-                <button id="cancel-btn">Отмена</button>
+                {/*кнопка активна только если в истории что-то есть */}
+                <button
+                onClick={undo}
+                disabled={!hasHistory}
+                id="cancel-btn">Отмена</button>
             </section>
         </main>
     )
