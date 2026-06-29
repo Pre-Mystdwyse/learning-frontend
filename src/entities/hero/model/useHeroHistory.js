@@ -1,9 +1,7 @@
-import { useHeroStore } from "./heroStore";
+import { useHero } from "./HeroProvider";
 
 export function useHeroHistory() {
-    const history = useHeroStore((state) => state.history);
-    const setHero = useHeroStore((state) => state.setHero);
-    const setHistory = useHeroStore((state) => state.setHistory);
+    const { setHero, history, setHistory } = useHero();
 
     const undo = () => {
         if (history.length === 0) return;

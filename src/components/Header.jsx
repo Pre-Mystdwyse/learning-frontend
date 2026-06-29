@@ -1,7 +1,8 @@
-import { useHeroStore } from "../entities/hero/model/heroStore";
+import { useContext } from "react";
+import { HeroContext } from "../entities/hero/model/HeroProvider";
 
 function Header() {
-    const hero = useHeroStore((state) => state.hero);
+    const { hero } = useContext(HeroContext);
 
     return (
         <header>

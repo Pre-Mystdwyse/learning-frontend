@@ -2,9 +2,12 @@ import { useOutletContext } from 'react-router-dom';
 import { ITEMS } from '../JS/items'
 import RareShop from "../components/RareShop";
 import { useHeroHistory } from '../entities/hero/model/useHeroHistory';
+import Inventory from '../components/Inventory';
+import { useHero } from '../entities/hero/model/HeroProvider';
 
 function ShopPage() {
     const { undo, hasHistory } = useHeroHistory();
+    const { hero } = useHero();
 
     return (
         <main>
@@ -65,8 +68,7 @@ function ShopPage() {
                 </form>
             </section>
             <section id="inventory-section">
-                <h3 />
-                <ul id="inventory-list" />
+                <Inventory inventoryItems={hero.inventory} />
                 {/*кнопка активна только если в истории что-то есть */}
                 <button
                 onClick={undo}

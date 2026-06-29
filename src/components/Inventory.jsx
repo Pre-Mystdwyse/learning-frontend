@@ -1,8 +1,15 @@
 import React from "react";
+import { useEffect } from "react";
 
 function Inventory({ inventoryItems }) {
 
     const hasItems = inventoryItems && inventoryItems.length > 0;
+
+    useEffect(() => {
+        if (hasItems) {
+            console.log(`Новый предмет получен! всего предметов: ${inventoryItems.length}`);
+        }
+    }, [inventoryItems]);
 
     return (
         <article>
@@ -11,7 +18,7 @@ function Inventory({ inventoryItems }) {
             </h3>
             {hasItems && (
                 <ul id="inventory-list">
-                    {inventoryItems.map((item, i) => (
+                    {inventoryItems.map((item) => (
                         <li key={item.id}>
                             {item.name}
                         </li>

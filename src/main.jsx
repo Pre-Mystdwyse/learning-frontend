@@ -6,6 +6,7 @@ import './CSS/style.css'
 import ProfilePage from "./pages/ProfilePage"
 import ShopPage from "./pages/ShopPage"
 import QuestPage from "./pages/QuestPage"
+import { HeroProvider } from "./entities/hero/model/HeroProvider"
 
 //сперва нужно создать объект маршрутизатора с путями
 const router = createBrowserRouter([
@@ -32,6 +33,8 @@ const router = createBrowserRouter([
 //передача маршрутизатора в RouterProvider
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <HeroProvider>
+            <RouterProvider router={router} />
+        </HeroProvider>
     </React.StrictMode>
 )

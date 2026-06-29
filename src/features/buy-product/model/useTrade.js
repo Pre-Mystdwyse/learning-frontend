@@ -1,9 +1,7 @@
-import { useHeroStore } from "../../../entities/hero/model/heroStore";
+import { useHero } from "../../../entities/hero/model/HeroProvider";
 
 export function useTrade() {
-    const hero = useHeroStore((state) => state.hero);
-    const setHero = useHeroStore((state) => state.setHero);
-    const setHistory = useHeroStore((state) => state.setHistory);
+    const { hero, setHero, setHistory } = useHero();
 
     const buyItem = (itemData) => {
         if (hero.gold >= itemData.price) {
@@ -17,7 +15,6 @@ export function useTrade() {
                 id: crypto.randomUUID()
             };
 
-            //zustand сам вызовет saveHero внутри себя
             setHero((prev) => ({
                 ...prev,
                 gold: prev.gold - itemData.price,
