@@ -1,0 +1,68 @@
+можно использовать опциональную цепочку вместо if:
+
+    //безопасный вызов через опциональную цепочку
+    listRef.current?.scrollIntoViev();
+
+    //через обычный if
+    if (listRef.current) {
+        listRef.current.scrollIntoViev();
+    }
+
+
+чтобы обратиться к конкретному элементу DOM в реакте используется useRef():
+
+    - создаём ссылку const listRef = useRef(null); (null нужен во избежания undefined до отрисовки
+    компонента, на который был повешан граплин-хук);
+    - вешаем на узел элемент <ul ref={listRef}>;
+    - после этого в listRef.current будет лежать настоящий HTML-узел (у него можно вызвать, например,
+    listRef.current.scrollIntoViev());
+
+    в listRef.current попадает HTML-элемент только после того, как он будет отрендерен браузером;
+    
+    ГЛАВНОЕ ПРАВИЛО: useRef не вызывает перерендер при изменении, ибо он меняется мутабельно. именно
+    поэтому весь код, работающий с DOM долен находиться внутри useEffect, например:
+
+        import { useRef, useEffect } from 'react':
+
+        function MyComponent({ shouldScroll }) {
+            const listRef = useRef(null);
+
+            useEffect (() => {
+                //всегда стоит делать проверку на null
+                if (listRef.current && shouldScroll) {
+                    //безопасно вызываем метод DOM-узла
+                    listRef.current.scrollIntoViev({ behavior: 'smooth' });
+                }
+            }, [shouldScroll]); //эффект сработает когда изменится проп shouldScroll
+
+            return <ul ref={listRef}><li>Пункт 1</li></ul>;
+        }
+
+    ВАЖНО: никогда не добавлять listRef или listRef.current в массив зависимостей хука useEffect. реакт
+    не отслеживает мутации объекта рефа, поэтому эффект из-за этого заного не запустится;
+
+
+
+
+    если элемент исчезает со страницы, то реакт автоматически очищает ссылку, чтобы избежать утечки памяти:
+
+        1. компонент решает убрать элемент из DOM;
+        2. реакт переприсваивает listRef.current = null;
+        3. реальный HTML-элемент удаляется из документа;
+
+    пример:
+
+        function ToggleList() {
+            const listRef = useRef(null);
+            const [ show, setShow ] = useState(true);
+
+            //если show === false, listRef.current автоматически станет = null
+            return (
+                <div>
+                    <button onClick={() => setShow(!show)}>Переключить</button>
+                    {show && <ul ref={listRef}><li>Элемент</li></ul>}
+                </div>
+            );
+        }
+    по этой причине проверка на if (listRef.current) внутри эффектов обязательна: элемент мог просто исчезнуть
+    со страницы к моменту выполнения какого-то асинхронного кода (например, внутри setTimeout или после запроса к API);

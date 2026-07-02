@@ -6,11 +6,6 @@ import { BrowserRouter as Router, Routes, Route, Link, Outlet } from 'react-rout
 
 function App() {
 
-    //автосохранение при любом изменении hero
-    // useEffect(() => {
-    //     saveHero(hero);
-    // }, [hero]);
-
 
     return (
         
