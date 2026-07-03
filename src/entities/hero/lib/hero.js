@@ -3,7 +3,8 @@ if (!localStorage.getItem('hero')) {
     const initialHero = {
         name: 'Карбел',
         gold: 10000,
-        inventory: []
+        inventory: [],
+        activeQuests: []
     };
     localStorage.setItem('hero', JSON.stringify(initialHero));
 }

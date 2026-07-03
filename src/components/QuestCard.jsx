@@ -1,7 +1,23 @@
 import { useState } from "react";
+import { useHero } from "../entities/hero/model/HeroProvider";
 
 function QuestCard({ quest }) {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
+    const { hero, setHero } = useHero();
+
+    const isActive = hero.activeQuests?.some(activeQuest => activeQuest.id === quest.id) || false;
+
+    function handleAccept() {
+        setHero(prev => {
+            const alreadyAccepted = prev.activeQuests?.some(q => q.id === quest.id);
+            if (alreadyAccepted) return prev;
+
+            return {
+                ...prev,
+                activeQuests: [ ...(prev.activeQuests || []), quest]
+            };
+        });
+    }
 
     return (
         <article id={quest.id} className={`quest-card ${quest.difficulty}`}>
@@ -20,7 +36,6 @@ function QuestCard({ quest }) {
                 </button>
                 { isModalOpen &&
                     <div className="modal-overlay" onClick={() => setIsModalOpen(false) }>
-                        <label htmlFor="modal-l1" className="modal-background" />
                         <div className="modal-content">
                         <h3>{quest.modalTitle}</h3>
                         <p>
@@ -29,7 +44,9 @@ function QuestCard({ quest }) {
                         </div>
                     </div>
                 }
-                <button className="accept-button">Приступить</button>
+                <button className="accept-button" disabled={isActive} onClick={handleAccept}>
+                    {isActive ? 'Выполняется...' : 'Приступить'}
+                </button>
                 </article>
     );
 }
