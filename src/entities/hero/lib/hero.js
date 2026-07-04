@@ -3,6 +3,8 @@ if (!localStorage.getItem('hero')) {
     const initialHero = {
         name: 'Карбел',
         gold: 10000,
+        heroImg: "images/main/karbel.png",
+        heroImgDescription: 'а вот и Карбел',
         inventory: [],
         activeQuests: []
     };

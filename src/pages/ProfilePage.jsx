@@ -1,19 +1,60 @@
-import React from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useHero } from '../entities/hero/model/HeroProvider';
+import Inventory from '../components/Inventory';
+import { useState } from 'react';
 
 function ProfilePage() {
-    const { hero, undo, history } = useOutletContext();
+    const { hero, setHero } = useHero();
+
+    const [ formData, setFormData ] = useState({
+        name: hero.name || "",
+        age: hero.age || 20,
+        mood: hero.mood || "good-neutral",
+        element: hero.element || "fire",
+        extra: hero.extra || [],
+        info: hero.info || ""
+    });
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData((prev) => {
+            switch (type) {
+                case "checkbox": {
+                    return {
+                        ...prev,
+                        [name]: checked
+                            ? [ ...prev[name], value]
+                            : prev[name].filter((item) => item !== value)
+                    };
+                }
+
+                default: {
+                    return {
+                        ...prev,
+                        [name]: value
+                    };
+                }
+            }
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setHero(prev => ({
+            ...prev,
+            ...formData
+        }));
+    };
 
     return (
         <main>
             <section id="character-profile">
-                <h2>Karbel</h2>
+                <h2>{hero.name}</h2>
                 <span className="badge">Mythic</span>
                 <figure>
                 <img
                     className="all-images"
-                    src="images/main/karbel.png"
-                    alt="Karbel в профиль"
+                    src={hero.heroImg}
+                    alt={hero.heroImgDescription}
                 />
                 <figcaption>
                     А это типа подпись картинки, хз как будет сотрудничать с alt
@@ -53,26 +94,25 @@ function ProfilePage() {
                 </p>
             </article>
             <section id="editor">
-                <form action="#" method="post">
+                <form action="#" method="post" onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>Личные данные</legend>
                     <label>
-                    Имя персонажа:{" "}
+                    Имя персонажа:
                     <input
                         type="text"
-                        placeholder="Карбел"
-                        required=""
-                        defaultValue="Карбел"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                     />
                     </label>
                     <label>
-                    Возраст героя:{" "}
+                    Возраст героя:
                     <input
                         type="number"
-                        placeholder={18}
-                        required=""
-                        min={18}
-                        max={1000}
+                        name="age"
+                        value={formData.age}
+                        onChange={handleChange}
                     />
                     </label>
                 </fieldset>
@@ -80,7 +120,7 @@ function ProfilePage() {
                     <legend>Выбор пути</legend>
                     <label htmlFor="mood">
                     Мировоззрение:
-                    <select name="char-mood" id="mood" required="">
+                    <select name="mood" id="mood" required="" value={formData.mood} onChange={handleChange}>
                         <optgroup label="Добро: ">
                         <option value="good-good">Законный</option>
                         <option value="good-neutral">Нейтральный</option>
@@ -99,32 +139,32 @@ function ProfilePage() {
                     <h3>Главная стихия:</h3>
                     <label>
                     Огонь
-                    <input type="radio" name="element" required="" defaultValue="fire" />
+                    <input type="radio" name="element" required="" value="fire" onChange={handleChange} checked={formData.element === "fire"} />
                     </label>
                     <label>
                     Земля
-                    <input type="radio" name="element" required="" defaultValue="earth" />
+                    <input type="radio" name="element" required="" value="earth" onChange={handleChange} checked={formData.element === "earth"} />
                     </label>
                     <label>
                     Вода
-                    <input type="radio" name="element" required="" defaultValue="water" />
+                    <input type="radio" name="element" required="" value="water" onChange={handleChange} checked={formData.element === "water"} />
                     </label>
                     <label>
                     Воздух
-                    <input type="radio" name="element" required="" defaultValue="air" />
+                    <input type="radio" name="element" required="" value="air" onChange={handleChange} checked={formData.element === "air"} />
                     </label>
                     <h3>Дополнительные навыки:</h3>
                     <label>
                     Скрытность
-                    <input type="checkbox" name="extra" defaultValue="stealth" />
+                    <input type="checkbox" name="extra" value="stealth" onChange={handleChange} checked={formData.extra.includes("stealth")} />
                     </label>
                     <label>
                     Алхимия
-                    <input type="checkbox" name="extra" defaultValue="alchemy" />
+                    <input type="checkbox" name="extra" value="alchemy" onChange={handleChange} checked={formData.extra.includes("alchemy")} />
                     </label>
                     <label>
                     Кузнечное дело
-                    <input type="checkbox" name="extra" defaultValue="blacksmith" />
+                    <input type="checkbox" name="extra" value="blacksmith" onChange={handleChange} checked={formData.extra.includes("blacksmith")} />
                     </label>
                 </fieldset>
                 <fieldset>
@@ -133,10 +173,11 @@ function ProfilePage() {
                     Примечание для мастера:{" "}
                     <textarea
                         name="info"
+                        value={formData.info}
                         rows={3}
                         cols={21}
                         placeholder="Изумительное изречение, если, конечно, необходимо"
-                        defaultValue={""}
+                        onChange={handleChange}
                     />
                     </label>
                 </fieldset>
@@ -144,9 +185,7 @@ function ProfilePage() {
                 </form>
             </section>
             <section id="inventory-section">
-                <h3>Твоё снаряжение</h3>
-                <ul id="inventory-list" />
-                <button id="cancel-btn">Отмена</button>
+                <Inventory inventoryItems={hero.inventory} />
             </section>
         </main>
 
