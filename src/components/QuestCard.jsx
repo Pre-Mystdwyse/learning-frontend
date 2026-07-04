@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { useHero } from "../entities/hero/model/HeroProvider";
 
 function QuestCard({ quest }) {
@@ -34,16 +35,18 @@ function QuestCard({ quest }) {
                 <button type="button" onClick={() => setIsModalOpen(true) }>
                     Подробнее
                 </button>
-                { isModalOpen &&
-                    <div className="modal-overlay" onClick={() => setIsModalOpen(false) }>
+                {isModalOpen && createPortal(
+                    <div className="modal-overlay">
+                        <div className="modal-background" onClick={() => setIsModalOpen(false)}></div>
                         <div className="modal-content">
                         <h3>{quest.modalTitle}</h3>
                         <p>
                             {quest.description}
                         </p>
                         </div>
-                    </div>
-                }
+                    </div>,
+                    document.body
+                )}
                 <button className="accept-button" disabled={isActive} onClick={handleAccept}>
                     {isActive ? 'Выполняется...' : 'Приступить'}
                 </button>

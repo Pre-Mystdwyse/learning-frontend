@@ -364,10 +364,6 @@ tr:hover td:nth-child(n+3)::after {
     margin-top: 20px;
 }
 
-.modal-logic {
-    display: none;
-}
-
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -375,14 +371,10 @@ tr:hover td:nth-child(n+3)::after {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-
-.modal-logic:checked ~ .modal-overlay {
-    display: flex;
 }
 
 .modal-content {
@@ -396,6 +388,8 @@ tr:hover td:nth-child(n+3)::after {
     padding-left: 15px;
     padding-right: 15px;
     box-shadow: 0 0 10px 2px #06961a;
+    position: relative;
+    z-index: 1;
 }
 
 .modal-background {
