@@ -8,7 +8,7 @@ function QuestPage() {
         <main>
             <h2 id="avialable-quests">Доступные квесты</h2>
 
-            <section id="card-art">
+            <section id="card-art" className="quest-board">
                 {QUESTS.map((quest) => (
                     <QuestCard
                     key={quest.id}

@@ -12,9 +12,9 @@ function Header() {
                 <a href="quests">Квесты</a>
                 <a href="#">Об игре</a>
                 </nav>
-            <div id="gold">
+            <div id="gold" className="gold-header">
                 <span>Золото: {hero.gold}</span>
-                <img id="img-coins" src="/images/all/gold-coins.png" alt="монеты" />
+                <img id="img-coins" className="gold-img" src="/images/all/gold-coins.png" alt="монеты" />
             </div>
         </header>
     );

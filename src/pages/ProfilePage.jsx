@@ -47,7 +47,7 @@ function ProfilePage() {
 
     return (
         <main>
-            <section id="character-profile">
+            <section class="character-profile">
                 <h2>{hero.name}</h2>
                 <span className="badge">Mythic</span>
                 <figure>

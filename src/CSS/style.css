@@ -19,7 +19,7 @@ body{
     padding-top: 150px;
 }
 
-#character-profile {
+.character-profile {
     background-color: var(--items-bg);
     border: 2px solid var(--borders-green);
     max-width: 600px;
@@ -30,7 +30,7 @@ body{
     position: relative;
 }
 
-#character-profile::after {
+.character-profile::after {
     content: "";
     position: absolute;
     top: -1px;
@@ -45,7 +45,7 @@ body{
     box-shadow: 0 10px 20px 10px #0b5c16;
 }
 
-#character-profile:hover::after {
+.character-profile:hover::after {
     opacity: 1;
 }
 
@@ -63,13 +63,6 @@ h1 {
     margin: 0;
     width: fit-content;
     position: relative;
-}
-
-#karbels-arsenal {
-    background: linear-gradient(73deg, #6019a1 35%, #00ff22);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
 }
 
 header h1::after {
@@ -227,11 +220,6 @@ th, td {
     box-shadow: 0 0 5px 5px #5b148a;
 }
 
-#rare-shop {
-    display: flex;
-    gap: 10px;
-}
-
 .shop-item {
     flex: 1;
     display: flex;
@@ -282,18 +270,6 @@ th, td {
 
 .git {
     display: inline-block;
-}
-
-#basilisk::before {
-    content: "не смотри в глаз, сука";
-}
-
-#hat::before {
-    content: "дарует умение колдовать дробовик";
-}
-
-#rage-brows::before {
-    content: "ЪЪУУАЮДЖПВРРРРААЪ";
 }
 
 .art-name {
@@ -348,10 +324,9 @@ tr:hover td:nth-child(n+3)::after {
     text-shadow: 0 0 10px var(--neon-green);
 }
 
-#card-art {
+.quest-board {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* определяем 2 колонки ровной ширины. 1fr = одна дробная часть */
     gap: 30px;
     position: relative;
     margin: 30px;
@@ -476,23 +451,7 @@ tr:hover td:nth-child(n+3)::after {
     transition: all 0.2s ease-in-out;
 }
 
-#q-hunt::before {
-    content: "Средне";
-    border-color: #d1d406;
-    box-shadow: 0 0 5px 5px #737506;
-    background-color: #7e6c0a;
-    color: #ff9900;
-}
-
-#q-find::before {
-    content: "Средне";
-    border-color: #d1d406;
-    box-shadow: 0 0 5px 5px #737506;
-    background-color: #7e6c0a;
-    color: #ff9900;
-}
-
-#q-research::before {
+.quest-card.hard::before {
     content: "Сложно";
     border-color: #d40606;
     box-shadow: 0 0 5px 5px #750606;
@@ -500,7 +459,15 @@ tr:hover td:nth-child(n+3)::after {
     color: #ff0000;
 }
 
-#q-help::before {
+.quest-card.medium::before {
+    content: "Средне";
+    border-color: #d1d406;
+    box-shadow: 0 0 5px 5px #737506;
+    background-color: #7e6c0a;
+    color: #ff9900;
+}
+
+.quest-card.easy::before {
     content: "Легко";
     border-color: #40d406;
     box-shadow: 0 0 5px 5px #137506;
@@ -525,16 +492,6 @@ tr:hover td:nth-child(n+3)::after {
     border: 2px solid #06961a;
 }
 
-#q-find::after {
-    content: "";
-    background: linear-gradient(to right, var(--neon-green) 18%, #043102 21%);
-}
-
-#q-research::after {
-    content: "";
-    background: linear-gradient(to right, var(--neon-green) 70%, #043102 73%);
-}
-
 .item-img:hover {
     transform: scale(1.1);
     box-shadow: 0 0 10px 5px #3c008b;
@@ -548,7 +505,7 @@ tr:hover td:nth-child(n+3)::after {
     background-size: 124% 124%, 110% 110%;
 }
 
-#gold {
+.gold-header {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -556,7 +513,7 @@ tr:hover td:nth-child(n+3)::after {
     color: var(--gold);
 }
 
-#img-coins {
+.gold-img {
     height: 20px;
     width: 20px;
 }
@@ -570,17 +527,8 @@ tr:hover td:nth-child(n+3)::after {
         height: 90px;
         gap: 10px;
     }
-
-     #character-profile {
-        max-width: 370px;
-     }
-
      body {
         padding-top: 100px;
-     }
-
-     #rare-shop {
-        flex-direction: column;
      }
 
      #card-art {

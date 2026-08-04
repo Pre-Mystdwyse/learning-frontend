@@ -1,15 +1,31 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect, useContext, ReactNode, Dispatch, SetStateAction } from "react";
 import { getHero, saveHero } from '../lib/hero';
 
-export const HeroContext = createContext(null);
+interface Hero {
+    name: string;
+    gold: number;
+    heroImg: string;
+    heroImgDescription: string;
+    inventory: any[];
+    activeQuests: any[];
+}
 
-export function HeroProvider({ children }) {
+interface HeroContextType {
+    hero: Hero;
+    setHero: Dispatch<SetStateAction<Hero>>;
+    history: Hero[];
+    setHistory: Dispatch<SetStateAction<Hero[]>>;
+}
+
+export const HeroContext = createContext<HeroContextType | null>(null);
+
+export function HeroProvider({ children }: { children: ReactNode }) {
 
     //передача без открывающих скобок нужна для ленивой инициализации
     //реакт сам вызовет эту функцию только тогда, когда константа не инициализирована
-    const [ hero, setHero ] = useState(getHero);
+    const [ hero, setHero ] = useState<Hero>(getHero);
 
-    const [ history, setHistory ] = useState([]);
+    const [ history, setHistory ] = useState<Hero[]>([]);
 
     //это для обновления объекта в localstorage при каждом обновлении hero
     useEffect(() => {
