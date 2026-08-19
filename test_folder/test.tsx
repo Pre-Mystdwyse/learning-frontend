@@ -2,62 +2,58 @@ import { create } from 'zustand'
 import { HeroStats, AlchemyItem, ShopCardProps } from './types'
 import { useState, useEffect } from 'react'
 import { fetchAlchemyItems } from './api'
+import { REQUIRED_VALUE_EFFECTS, EFFECT_STRATEGIES } from './effectStrategies'
 
 export const useHeroStore = create<HeroStats>((set, get) => ({
     hp: 100,
+    maxHp: 100,
     gold: 50,
 
     takeDamage: (amount) => set((state) => ({ hp: state.hp - amount })),
-    healFull: () => set({ hp: 100 }),
-
-    spendGold: (amount) => {
+    buyAndConsumeItem: (item) => {
+        const currentHp = get().hp;
+        const currentMaxHp = get().maxHp;
         const currentGold = get().gold;
 
-        if (currentGold >= amount) {
-            set({ gold: currentGold - amount });
-            return { ifNotEnoughGold: null };
+        if (currentGold < item.price) {
+            return { success: false, reason: "not_enough_gold", redundant: null };
         }
-        else {
-            return { ifNotEnoughGold: amount - currentGold };
+
+        if (!item.effects || item.effects.length === 0) {
+            return { success: false, reason: "invalid_potion", redundant: null };
         }
-    },
-
-    healABit: (amount, percent) => {
-        const currentHp = get().hp;
-
-        let nonEffective: number | null = null;
-        let nullPotions: boolean = false;;
 
         let nextHp = currentHp;
 
-        switch(true) {
-            case (amount === null && percent === null):
-                nullPotions = true;
-                break;
-            case (amount !== null && percent === null):
-                nextHp = currentHp + amount;
-                break;
-            case (amount === null && percent !== null):
-                nextHp = Math.round(currentHp * (1 + percent / 100));
-                break;
-            case (amount !== null && percent !== null):
-                nextHp = Math.round((currentHp + amount) * (1 + (percent / 100)));
-                break;
+        for (const effect of item.effects) {
+            if (!effect || !effect.type || !EFFECT_STRATEGIES[effect.type]) {
+                return { success: false, reason: "corrupted_potion_data", redundant: null };
+            }
+
+            if (REQUIRED_VALUE_EFFECTS[effect.type] && (effect.value === undefined || effect.value === 0)) {
+                return { success: false, reason: "corrupted_potion_data", redundant: null };
+            }
+
+            const strategy = EFFECT_STRATEGIES[effect.type];
+            nextHp = strategy(nextHp, currentMaxHp, effect.value ?? 0);
         }
 
-        if (nextHp > 100) {
-            nonEffective = nextHp - 100;
-            nextHp = 100;
+        if (nextHp < 0) {
+            nextHp = 0;
         }
 
-        if (nextHp !== currentHp) {
-            set({ hp: nextHp });
+        let overHeal = null;
+
+        if (nextHp > currentMaxHp) {
+            overHeal = nextHp - currentMaxHp;
+            nextHp = currentMaxHp;
         }
 
-        return {
-            nonEffective,
-            nullPotions,
-        };
+        set({
+            gold: currentGold - item.price,
+            hp: nextHp,
+        });
+        return { success: true, reason: null, redundant: overHeal}
     }
 }));
 
@@ -68,7 +64,9 @@ function HeroStats() {
     return (
         <header>
             <div className='heroStats'>
-                {heroHpColorer(heroHp)}
+                <div className={`heroHp ${getHpHeroClass(heroHp)}`}>
+                    {heroHp}
+                </div>
                 <div className='heroGold'>
                     {heroGold}
                 </div>
@@ -77,46 +75,24 @@ function HeroStats() {
     )
 }
 
-function heroHpColorer(currentHeroHp: number | null) {
-    switch(true) {
-        case (currentHeroHp === null || currentHeroHp < 0):
-            console.log('хп героя === null || < 0');
-            break;
-        case (currentHeroHp !== null
-            && currentHeroHp >= 75
-            && currentHeroHp <= 100):
-            return (
-                <div className='heroHp greenHeroHp'>
-                    {currentHeroHp}
-                </div>
-            )
-        case (currentHeroHp !== null
-            && currentHeroHp < 75
-            && currentHeroHp >= 25):
-            return (
-                <div className='heroHp yellowHeroHp'>
-                    {currentHeroHp}
-                </div>
-            )
-        case (currentHeroHp !== null
-            && currentHeroHp < 25
-            && currentHeroHp > 0):
-            return (
-                <div className='heroHp redHeroHp'>
-                    {currentHeroHp}
-                </div>
-            )
-    };
+function getHpHeroClass(hp: number | null): string {
+    if (hp === null || hp < 0) return 'redHeroHp';
+    if (hp >= 75) return 'greenHeroHp';
+    if (hp >= 25) return 'yellowHeroHp';
+    return 'redHeroHp';
 }
 
 function AlchemyShop() {
     const [ items, setItems ] = useState<AlchemyItem[]>([]);
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
 
-    //пример использования .then
-    // fetch('https://api.itupupuye.com/data')
-    //     .then(response => response.json())
-    //     .then(data => console.log(data));
+    /*
+    пример использования .then
+    fetch('https://api.itupupuye.com/data')
+        .then(response => response.json())
+        .then(data => console.log(data));
+    конец примера использования .then
+    */
 
     useEffect(() =>{
         const loadItems = async () => {
@@ -136,32 +112,35 @@ function AlchemyShop() {
         loadItems();
     }, []);
 
-    //старый вариант, который лучше не использовать
-    // useEffect(() => {
-    //     fetchAlchemyItems()
-    //         .then((data) => {
-    //             setItems(data);
-    //             setIsLoading(false);
-    //         })
-    //         .catch((error) => {
-    //             console.error("Ошибка при загрузке товаров: ", error);
-    //             setIsLoading(false);
-    //         });
-    // }, []);
+    /*
+    старый вариант, который лучше не использовать
+    useEffect(() => {
+        fetchAlchemyItems()
+            .then((data) => {
+                setItems(data);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.error("Ошибка при загрузке товаров: ", error);
+                setIsLoading(false);
+            });
+    }, []);
+    конец старого варианта, который лучше не использовать
+    */
 
-    const currentHp = useHeroStore((state) => state.hp);
-    const currentGold = useHeroStore((state) => state.gold);
-
-    const takeDamage = useHeroStore((state) => state.takeDamage);
-    const healFull = useHeroStore((state) => state.healFull);
-    const spendGold = useHeroStore((state) => state.spendGold);
-    const healABit = useHeroStore((state) => state.healABit);
+    const buyAndConsumeItem = useHeroStore((state) => state.buyAndConsumeItem);
 
     const handleBuy = (item: AlchemyItem) => {
-        if (currentGold < item.price) {
-            let diff = item.price - currentGold;
-            console.log("Не хватает серебра: ", diff)
-            return;
+        const result = buyAndConsumeItem(item);
+
+        if (!result.success) {
+            //я знаю, что алерты - плохо
+            //я заменю их позже на решения из библиотеки Sonner
+            if (result.reason === "not_enough_gold") alert("Нужно больше золота!");
+            if (result.reason === "invalid_potion") alert("Алхимик подсунул паль");
+            if (result.reason === "corrupted_potion_data") alert("Тут спирта больше чем зелья");
+        } else {
+            console.log("успешная покупка");
         }
     }
 

@@ -1,50 +1,52 @@
+
 [
     {
         "id": "alc_1",
         "name": "Простое зелье лечения",
         "price": 5,
-        "raw": 15,
-        "percent": null,
-        "healFull": false
+        "effects": [
+            { "type": "heal'_raw", "value": 15 }
+        ]
     },
     {
         "id": "alc_2",
         "name": "Зелье 'Само пройдёт'",
         "price": 20,
-        "raw": 50,
-        "percent": null,
-        "healFull": false
+        "effects": [
+            { "type": "heal_raw", "value": 50 }
+        ]
     },
     {
         "id": "alc_3",
         "name": "Begin again",
         "price": 50,
-        "raw": null,
-        "percent": null,
-        "healFull": true
+        "effects": [
+            { "type": "heal_full" }
+        ]
     },
     {
-        "id": "alc_4",
+        "id": "alc_",
         "name": "Для терпил",
-        "price": 25,
-        "raw": null,
-        "percent": 25,
-        "healFull": false
+        "price": 15,
+        "effects": [
+            { "type": "heal_percent", "value": 25 }
+        ]
     },
     {
         "id": "alc_5",
         "name": "Маркетинговый ход",
-        "price": 30,
-        "raw": 10,
-        "percent": 10,
-        "healFull": false
+        "price": 15,
+        "effects": [
+            { "type": "heal_raw", "value": 10 },
+            { "type": "heal_percent", "value": 10 }
+        ]
     },
     {
         "id": "alc_6",
         "name": "яинечел еьлез еонтемирпеН",
         "price": 10,
-        "raw": -20,
-        "percent": null,
-        "healFull": false
+        "effects": [
+            { "type": "damage", "value": 20 }
+        ]
     }
 ]
