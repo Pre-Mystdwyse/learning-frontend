@@ -33,8 +33,6 @@ const router = createBrowserRouter([
 //передача маршрутизатора в RouterProvider
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <HeroProvider>
-            <RouterProvider router={router} />
-        </HeroProvider>
+        <RouterProvider router={router} />
     </React.StrictMode>
 )

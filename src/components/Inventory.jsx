@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useRef, useMemo } from "react";
 
 function Inventory({ inventoryItems }) {
