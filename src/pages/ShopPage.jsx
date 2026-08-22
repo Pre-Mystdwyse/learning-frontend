@@ -1,5 +1,4 @@
 import { useOutletContext } from 'react-router-dom';
-import { ITEMS } from '../JS/items'
 import RareShop from "../components/RareShop";
 import { useHeroHistory } from '../entities/hero/model/useHeroHistory';
 import Inventory from '../components/Inventory';
