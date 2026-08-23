@@ -15,6 +15,6 @@ export const ITEMS = {
         name: 'Брови ярости',
         price: 1000,
         img: 'images/arsenal/trades/rage_brows.png',
-        description: 'Да как же вы мне ВСЕ НАДАРРРЛПКОЮЩУШПЫВЖРА'
+        description: 'Да как же вы мне ВСЕ НАДРРРЛПКОЮЩУШПЫВЖРА'
     }
 }
