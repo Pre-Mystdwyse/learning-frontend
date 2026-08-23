@@ -1,7 +1,7 @@
 import { useMemo, useRef, useEffect } from "react";
 import { useHeroStore } from "../entities/hero/model/heroStore";
 
-function Inventory() {
+export function Inventory() {
     const currentHeroInventory = useHeroStore((state) => state.inventory);
     const sellItem = useHeroStore((state) => state.sellItem);
 

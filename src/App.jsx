@@ -1,7 +1,4 @@
-import React, { useState, useEffect, use } from "react";
 import Header from "./components/Header";
-import Inventory from "./components/Inventory";
-import { ITEMS } from "./js/items";
 import { BrowserRouter as Router, Routes, Route, Link, Outlet } from 'react-router-dom';
 
 function App() {

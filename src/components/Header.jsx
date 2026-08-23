@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { HeroContext } from "../entities/hero/model/HeroProvider";
+import { useHeroStore } from "../entities/hero/model/heroStore";
 
 function Header() {
-    const { hero } = useContext(HeroContext);
+    const currentHeroGold = useHeroStore((state) => state.gold);
 
     return (
         <header>
@@ -13,7 +12,7 @@ function Header() {
                 <a href="#">Об игре</a>
                 </nav>
             <div id="gold" className="gold-header">
-                <span>Золото: {hero.gold}</span>
+                <span>Золото: {currentHeroGold}</span>
                 <img id="img-coins" className="gold-img" src="/images/all/gold-coins.png" alt="монеты" />
             </div>
         </header>

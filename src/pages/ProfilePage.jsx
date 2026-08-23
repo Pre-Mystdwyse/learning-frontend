@@ -1,17 +1,17 @@
-import { useHero } from '../entities/hero/model/HeroProvider';
-import Inventory from '../components/Inventory';
+import { Inventory } from '../components/Inventory';
 import { useState } from 'react';
+import { useHeroStore } from '../entities/hero/model/heroStore';
 
 function ProfilePage() {
-    const { hero, setHero } = useHero();
+    const heroState = useHeroStore();
 
     const [ formData, setFormData ] = useState({
-        name: hero.name || "",
-        age: hero.age || 20,
-        mood: hero.mood || "good-neutral",
-        element: hero.element || "fire",
-        extra: hero.extra || [],
-        info: hero.info || ""
+        name: heroState.name || "",
+        age: heroState.age || 20,
+        mood: heroState.mood || "good-neutral",
+        element: heroState.element || "fire",
+        extra: heroState.extra || [],
+        info: heroState.info || ""
     });
 
     const handleChange = (e) => {
@@ -48,13 +48,13 @@ function ProfilePage() {
     return (
         <main>
             <section class="character-profile">
-                <h2>{hero.name}</h2>
+                <h2>{heroState.name}</h2>
                 <span className="badge">Mythic</span>
                 <figure>
                 <img
                     className="all-images"
-                    src={hero.heroImg}
-                    alt={hero.heroImgDescription}
+                    src={heroState.heroImgSrc}
+                    alt={useHeroStore.heroImgDesc}
                 />
                 <figcaption>
                     А это типа подпись картинки, хз как будет сотрудничать с alt
@@ -185,7 +185,7 @@ function ProfilePage() {
                 </form>
             </section>
             <section id="inventory-section">
-                <Inventory inventoryItems={hero.inventory} />
+                <Inventory/>
             </section>
         </main>
 

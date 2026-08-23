@@ -1,5 +1,3 @@
-import React from "react";
-import { useOutletContext } from 'react-router-dom';
 import QuestCard from "../components/QuestCard";
 import { QUESTS } from "../JS/quests";
 

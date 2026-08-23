@@ -1,38 +1,18 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { useHero } from "../entities/hero/model/HeroProvider";
-
-interface Quest {
-    id: string;
-    difficulty: string;
-    title: string;
-    target: string;
-    rewardImg: string;
-    imgDescription: string;
-    modalTitle: string;
-    description: string;
-}
-
-interface QuestCardProps {
-    quest: Quest;
-}
+import { useHeroStore } from "../entities/hero/model/heroStore";
+import { QuestCardProps } from "../entities/hero/model/types";
 
 function QuestCard({ quest }: QuestCardProps) {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
-    const { hero, setHero } = useHero();
+    const acceptQuest = useHeroStore((state) => state.acceptQuest);
 
-    const isActive = hero.activeQuests?.some(activeQuest => activeQuest.id === quest.id) || false;
+    const isActive = useHeroStore((state) => 
+        state.activeQuests.some(q => q.id === quest.id)
+    );
 
     function handleAccept() {
-        setHero(prev => {
-            const alreadyAccepted = prev.activeQuests?.some(q => q.id === quest.id);
-            if (alreadyAccepted) return prev;
-
-            return {
-                ...prev,
-                activeQuests: [ ...(prev.activeQuests || []), quest]
-            };
-        });
+        acceptQuest(quest);
     }
 
     return (

@@ -1,7 +1,7 @@
-import { useTrade } from "../features/buy-product/model/useTrade";
+import { useHeroStore } from "../entities/hero/model/heroStore";
 
 function ShopItem({ itemData }) {
-    const { buyItem } = useTrade();
+    const buyItem = useHeroStore((state) => state.buyItem);
 
     return (
         <article className="shop-item">

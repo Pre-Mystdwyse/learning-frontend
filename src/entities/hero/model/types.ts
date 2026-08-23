@@ -8,6 +8,12 @@ export interface InventoryItem {
     imgDesc: string;
 }
 
+export type CharacterMood = 'good-good' | 'good-neutral' | 'good-chaotic' | 'evil-good' | 'evil-neutral' | 'evil-chaotic';
+
+export type CharacterElement = 'fire' | 'earth' | 'water' | 'air';
+
+export type CharacterProfessions = 'blacksmith' | 'alchemy' | 'stealth';
+
 export interface HeroState {
     name: string;
     gold: number;
@@ -16,7 +22,13 @@ export interface HeroState {
     heroImgSrc: string;
     heroImgDesc: string;
     inventory: InventoryItem[];
-    activeQuests: any[];
+    activeQuests: Quest[];
+
+    age: number,
+    mood: CharacterMood,
+    element: CharacterElement | null,
+    extra: CharacterProfessions[],
+    info: string | null,
 }
 
 export interface HeroStore extends HeroState {
@@ -25,4 +37,22 @@ export interface HeroStore extends HeroState {
     buyItem: (itemData: Omit<InventoryItem, 'id'>) => { success: boolean; reason?: string; };
     sellItem: (itemId: string) => void;
     undo: () => void;
+    acceptQuest: (quest: Quest) => { success: boolean; reason?: string };
+}
+
+export type QuestDifficulty = 'easy' | 'medium' | 'hard';
+
+export interface Quest {
+    id: string,
+    difficulty: QuestDifficulty,
+    title: string,
+    target: string,
+    rewardImg: string,
+    imgDescription: string,
+    modalTitle: string,
+    description: string,
+}
+
+export interface QuestCardProps {
+    quest: Quest,
 }
