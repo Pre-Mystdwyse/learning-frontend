@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { useHeroStore } from "../entities/hero/model/heroStore";
 import { QuestCardProps } from "../entities/hero/model/types";
 
-function QuestCard({ quest }: QuestCardProps) {
+export function QuestCard({ quest }: QuestCardProps) {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
     const acceptQuest = useHeroStore((state) => state.acceptQuest);
 
@@ -48,5 +48,3 @@ function QuestCard({ quest }: QuestCardProps) {
         </article>
     );
 }
-
-export default QuestCard;

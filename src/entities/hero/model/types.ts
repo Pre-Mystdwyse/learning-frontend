@@ -56,3 +56,16 @@ export interface Quest {
 export interface QuestCardProps {
     quest: Quest,
 }
+
+export interface Item {
+    name: string,
+    price: number,
+    img: string,
+    description: string,
+}
+
+export type ShopFetch = Record<string, Item>;
+
+export interface ShopItem extends Item {
+    id: string,
+}

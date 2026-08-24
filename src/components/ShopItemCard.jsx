@@ -1,6 +1,6 @@
 import { useHeroStore } from "../entities/hero/model/heroStore";
 
-function ShopItem({ itemData }) {
+export function ShopItemCard({ itemData }) {
     const buyItem = useHeroStore((state) => state.buyItem);
 
     return (
@@ -12,5 +12,3 @@ function ShopItem({ itemData }) {
         </article>
     );
 }
-
-export default ShopItem;

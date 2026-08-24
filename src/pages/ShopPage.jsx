@@ -1,4 +1,4 @@
-import RareShop from "../components/RareShop";
+import { RareShop } from "../components/RareShop";
 import { Inventory } from '../components/Inventory';
 import { useHeroStore } from '../entities/hero/model/heroStore';
 
