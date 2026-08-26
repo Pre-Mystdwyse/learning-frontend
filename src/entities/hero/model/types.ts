@@ -60,12 +60,16 @@ export interface QuestCardProps {
 export interface Item {
     name: string,
     price: number,
-    img: string,
-    description: string,
+    imgSrc: string,
+    imgDesc: string,
+}
+
+export interface ShopItem extends Item {
+    id: string,
 }
 
 export type ShopFetch = Record<string, Item>;
 
-export interface ShopItem extends Item {
-    id: string,
+export interface ShopItemCardProps {
+    itemData: ShopItem,
 }

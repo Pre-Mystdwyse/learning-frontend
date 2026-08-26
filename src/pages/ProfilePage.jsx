@@ -47,14 +47,14 @@ function ProfilePage() {
 
     return (
         <main>
-            <section class="character-profile">
+            <section className="character-profile">
                 <h2>{heroState.name}</h2>
                 <span className="badge">Mythic</span>
                 <figure>
                 <img
                     className="all-images"
                     src={heroState.heroImgSrc}
-                    alt={useHeroStore.heroImgDesc}
+                    alt={heroState.heroImgDesc}
                 />
                 <figcaption>
                     А это типа подпись картинки, хз как будет сотрудничать с alt

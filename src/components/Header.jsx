@@ -1,4 +1,5 @@
 import { useHeroStore } from "../entities/hero/model/heroStore";
+import { Link } from "react-router-dom";
 
 function Header() {
     const currentHeroGold = useHeroStore((state) => state.gold);
@@ -7,9 +8,15 @@ function Header() {
         <header>
             <h1>Киберкринж (React Edition)</h1>
             <nav>
-                <a href="shop">Арсенал</a>
-                <a href="quests">Квесты</a>
-                <a href="#">Об игре</a>
+                {/*если использовать <a>, то вся суть SPA будет утеряна,
+                ибо этот тег заставляет перезагружаться всю страницу.
+                вместо этого нужно использовать Link с to, который
+                работает по заданным роутам. этот тег добавит соответственный
+                путь в адресной строке + перерендерит текущие компоненты на
+                необходимые, привязанные к запрошенному пути*/}
+                <Link to="/shop">Кузня</Link>
+                <Link to="/quests">Квесты</Link>
+                <Link to="/profile">Профиль</Link>
                 </nav>
             <div id="gold" className="gold-header">
                 <span>Золото: {currentHeroGold}</span>
@@ -18,4 +25,3 @@ function Header() {
         </header>
     );
 }
-export default Header;
