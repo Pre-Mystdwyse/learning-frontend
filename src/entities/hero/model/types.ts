@@ -38,6 +38,7 @@ export interface HeroStore extends HeroState {
     sellItem: (itemId: string) => void;
     undo: () => void;
     acceptQuest: (quest: Quest) => { success: boolean; reason?: string };
+    updateProfile: (newData: Partial<HeroState>) => void;
 }
 
 export type QuestDifficulty = 'easy' | 'medium' | 'hard';

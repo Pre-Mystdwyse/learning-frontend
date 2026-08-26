@@ -1,7 +1,7 @@
 import { useHeroStore } from "../entities/hero/model/heroStore";
 import { Link } from "react-router-dom";
 
-function Header() {
+export function Header() {
     const currentHeroGold = useHeroStore((state) => state.gold);
 
     return (

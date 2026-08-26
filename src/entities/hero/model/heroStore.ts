@@ -93,6 +93,10 @@ export const useHeroStore = create<HeroStore>()(
                     });
                     
                     return { success: true };
+                },
+
+                updateProfile: (newData) => {
+                    
                 }
         }},
         {

@@ -1,9 +1,20 @@
 import { Inventory } from '../components/Inventory';
 import { useState } from 'react';
 import { useHeroStore } from '../entities/hero/model/heroStore';
+import { useShallow } from 'zustand/shallow';
 
 function ProfilePage() {
-    const heroState = useHeroStore();
+    const { name, age, mood, element, extra, info, updateProfile } = useHeroStore(
+        useShallow((state) => ({
+            name: state.name,
+            age: state.age,
+            mood: state.mood,
+            element: state.element,
+            extra: state.extra,
+            info: state.info,
+            updateProfile: state.updateProfile,
+        }))
+    );
 
     const [ formData, setFormData ] = useState({
         name: heroState.name || "",
@@ -14,8 +25,8 @@ function ProfilePage() {
         info: heroState.info || ""
     });
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+    const handleChange = (event) => {
+        const { name, value, type, checked } = event.target;
         setFormData((prev) => {
             switch (type) {
                 case "checkbox": {
