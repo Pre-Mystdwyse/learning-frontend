@@ -4,7 +4,7 @@ import { useHeroStore } from '../entities/hero/model/heroStore';
 import { useShallow } from 'zustand/shallow';
 
 function ProfilePage() {
-    const { name, age, mood, element, extra, info, updateProfile } = useHeroStore(
+    const { name, age, mood, element, extra, info, updateProfile, heroImgSrc, heroImgDesc } = useHeroStore(
         useShallow((state) => ({
             name: state.name,
             age: state.age,
@@ -17,12 +17,12 @@ function ProfilePage() {
     );
 
     const [ formData, setFormData ] = useState({
-        name: heroState.name || "",
-        age: heroState.age || 20,
-        mood: heroState.mood || "good-neutral",
-        element: heroState.element || "fire",
-        extra: heroState.extra || [],
-        info: heroState.info || ""
+        name: name || "",
+        age: age || 20,
+        mood: mood || "good-neutral",
+        element: element || "fire",
+        extra: extra || [],
+        info: info || ""
     });
 
     const handleChange = (event) => {
@@ -59,13 +59,13 @@ function ProfilePage() {
     return (
         <main>
             <section className="character-profile">
-                <h2>{heroState.name}</h2>
+                <h2>{name}</h2>
                 <span className="badge">Mythic</span>
                 <figure>
                 <img
                     className="all-images"
-                    src={heroState.heroImgSrc}
-                    alt={heroState.heroImgDesc}
+                    src={heroImgSrc}
+                    alt={heroImgDesc}
                 />
                 <figcaption>
                     А это типа подпись картинки, хз как будет сотрудничать с alt
