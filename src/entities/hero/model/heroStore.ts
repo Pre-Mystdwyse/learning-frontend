@@ -96,7 +96,12 @@ export const useHeroStore = create<HeroStore>()(
                 },
 
                 updateProfile: (newData) => {
-                    
+                    const state = get();
+
+                    set({
+                        history: [ ...state.history, createSnapshot(state)],
+                        ...newData,
+                    });
                 }
         }},
         {

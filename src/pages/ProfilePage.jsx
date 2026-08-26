@@ -25,6 +25,8 @@ function ProfilePage() {
         info: info || ""
     });
 
+    //я всё ещё в недоумении, почему при написании [name], перед ним не надо ставить точку
+    //считаю, что немного потеряна интуитивность, но что есть, то есть
     const handleChange = (event) => {
         const { name, value, type, checked } = event.target;
         setFormData((prev) => {
@@ -48,13 +50,13 @@ function ProfilePage() {
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setHero(prev => ({
-            ...prev,
-            ...formData
-        }));
-    };
+    const handleSubmit = (event) => {
+        //запрет дефолтного поведения браузера
+        //(он пытается при применении формы обновить страницу)
+        event.preventDefault();
+
+        updateProfile(formData);
+    }
 
     return (
         <main>
