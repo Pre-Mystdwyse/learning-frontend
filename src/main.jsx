@@ -6,6 +6,7 @@ import './CSS/style.css'
 import ProfilePage from "./pages/ProfilePage"
 import ShopPage from "./pages/ShopPage"
 import { QuestPage } from "./pages/QuestPage"
+import { TestPage } from "./pages/TestPage"
 
 //сперва нужно создать объект маршрутизатора с путями
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: "/quests",
                 element: <QuestPage />
+            },
+            {
+                path: "/test",
+                element: <TestPage />
             }
         ]
     }
