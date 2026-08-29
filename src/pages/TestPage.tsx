@@ -5,7 +5,10 @@ export function TestPage() {
     return (
         <div className="flex flex-col h-screen overflow-hidden">
             <TestHeader/>
-            <SomeContainer/>
+            <div className="">
+                <SomeContainer/>
+                <GridContainer/>
+            </div>
             <article
             className="w-full bg-gray-800 text-teal-50
             flex flex-1 justify-center items-center">
@@ -32,19 +35,46 @@ function TestHeader() {
 function SomeContainer() {
     return (
         <div className=" flex w-100 border-2 border-purple-500 bg-purple-900 flex-wrap gap-2 p-4">
-            <p className="">HTML</p>
-            <p className="">CSS</p>
-            <p className="">JS</p>
-            <p className="">React</p>
-            <p className="">Vite</p>
-            <p className="">TS</p>
-            <p className="">Zustand</p>
-            <p className="">Tailwind CSS</p>
-            <p className="">FSD</p>
-            <p className="">Zod</p>
-            <p className="">and more...</p>
-            <p className="">and more...</p>
-            <p className="">and more...</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">HTML</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">CSS</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">JS</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">React</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">Vite</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">TS</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">Zustand</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">Tailwind CSS</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">FSD</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">Zod</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">and more...</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">and more...</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+            <p className="text-blue-100 border-2 p-1 border-green-600 bg-violet-900 rounded-r-4xl">and more...</p>
+            <p className="text-blue-100 border-2 p-1 border-violet-600 bg-green-900 rounded-l-4xl">#</p>
+        </div>
+    )
+}
+
+function GridContainer() {
+    return (
+        <div className="grid grid-cols-3 gap-4 p-4">
+            <div className="bg-gray-700 w-9 h-9">01</div>
+            <div className="bg-gray-700 w-9 h-9">02</div>
+            <div className="bg-gray-700 w-9 h-9">03</div>
+            <div className="bg-gray-700 w-9 h-9">04</div>
+            <div className="bg-gray-700 w-9 h-9">05</div>
+            <div className="bg-gray-700 w-9 h-9">06</div>
         </div>
     )
 }
