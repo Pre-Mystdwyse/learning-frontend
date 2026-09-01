@@ -39,10 +39,16 @@ export const fetchItemsData = (): Promise<ShopItem[]> => {
                 //теперь он берёт basilisk: {...} и разделяет так
                 // название (id) помещает в id, а всё, чему это название было равно
                 //помещает в item
-                const formattedItems = Object.entries(itemsData).map(([id, item]) => ({
-                    id,
-                    ...item,
-                }));
+                const formattedItems = Object.entries(itemsData).map(([id, item]) => {
+                    const { img, description, ...rest } = item;
+
+                    return {
+                        id,
+                        imgSrc: img,
+                        imgDesc: description,
+                        ...rest,
+                    }
+                });
                 resolve(formattedItems);
             }
             else {
