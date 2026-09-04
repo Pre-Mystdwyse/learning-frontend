@@ -8,6 +8,10 @@ export interface InventoryItem {
     imgDesc: string;
 }
 
+export interface InventoryItemCardProps {
+    item: InventoryItem,
+}
+
 export type CharacterMood = 'good-good' | 'good-neutral' | 'good-chaotic' | 'evil-good' | 'evil-neutral' | 'evil-chaotic';
 
 export type CharacterElement = 'fire' | 'earth' | 'water' | 'air';

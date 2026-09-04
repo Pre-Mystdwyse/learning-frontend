@@ -4,77 +4,37 @@ import { useHeroStore } from '../entities/hero/model/heroStore';
 
 function ShopPage() {
     const undo = useHeroStore((state) => state.undo);
-    const currentHeroHistory = useHeroStore((state) => state.history);
-    
-    const hasHistory = currentHeroHistory && currentHeroHistory.length > 0;
+    const historyLength = useHeroStore((state) => state.history.length);
+
+    const hasHistory = historyLength > 0;
 
     return (
-        <main>
+        <div className="flex flex-col gap-8">
+            
+            <header className="border-b border-slate-800 pb-4">
+                <h1 className="text-3xl md:text-4xl font-bold text-violet-400">Торговый квартал</h1>
+                <p className="text-slate-400 mt-2">Здесь можно купить лучшее снаряжение или продать лишнее</p>
+            </header>
+
             <section>
-                <h2>Имеющееся вооружение</h2>
-                <div className="table-wrapper">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Название</th>
-                        <th>Тип</th>
-                        <th>Мощь</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Ясеневый жезл</td>
-                        <td>Магия</td>
-                        <td>7</td>
-                    </tr>
-                    <tr>
-                        <td>Двуручный меч</td>
-                        <td>Ближний бой</td>
-                        <td>8</td>
-                    </tr>
-                    <tr>
-                        <td>Охотничий лук</td>
-                        <td>Дальний бой</td>
-                        <td>5</td>
-                    </tr>
-                    <tr>
-                        <td>Щит</td>
-                        <td>Ближний бой</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>Парные кинжалы</td>
-                        <td>Ближний бой</td>
-                        <td>4*2</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <RareShop />
+            </section>
+
+            <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
+                <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-2xl font-bold text-white">Ваш инвентарь</h2>
+
+                    <button
+                        onClick={undo}
+                        disabled={!hasHistory}
+                        className="px-6 py-2 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-semibold">
+                        Отменить действие
+                    </button>
                 </div>
-            </section>
-            <RareShop />
-            <section id="forge">
-                <h2>Добавить предмет в кузницу</h2>
-                <form action="#" method="post">
-                <label htmlFor="weapon-name">Название оружия: </label>
-                <input type="text" id="weapon-name" required="" />
-                <label htmlFor="weapon-rare">Редкость оружия:</label>
-                <select name="rare" id="weapon-rare" required="">
-                    <option value="common">Обычный</option>
-                    <option value="rare">Редкий</option>
-                    <option value="mythic">Мифический</option>
-                </select>
-                <button type="submit">Выковать</button>
-                </form>
-            </section>
-            <section id="inventory-section">
+
                 <Inventory />
-                {/*кнопка активна только если в истории что-то есть */}
-                <button
-                onClick={undo}
-                disabled={!hasHistory}
-                id="cancel-btn">Отмена</button>
             </section>
-        </main>
+        </div>
     )
 }
 

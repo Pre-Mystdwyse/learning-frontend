@@ -128,7 +128,7 @@ const fetchTestData = (): Promise<TestItem[]> => {
     const tryToConnect = Math.floor(Math.random() * 100) + 1;
 
     setTimeout(() => {
-      if (tryToConnect >= 99) {
+      if (tryToConnect >= 25) {
         const formattedItems = TEST_ITEMS.map((item) => ({ ...item }));
         resolve(formattedItems);
       } else {
@@ -140,7 +140,7 @@ const fetchTestData = (): Promise<TestItem[]> => {
 
 function MasonryLayout() {
   return (
-    <div className="mx-4 my-4 columns-2 gap-4 sm:columns-3xs">
+    <div className="mx-4 my-4 gap-4 columns-2 sm:columns-3xs">
       <div className="mb-4 aspect-auto h-32 break-inside-avoid bg-red-500"></div>
       <div className="mb-4 aspect-auto h-42 break-inside-avoid bg-green-500"></div>
       <div className="mb-4 aspect-auto h-64 break-inside-avoid bg-blue-500"></div>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import './CSS/style.css'
-import ProfilePage from "./pages/ProfilePage"
+import { ProfilePage } from "./pages/ProfilePage"
 import ShopPage from "./pages/ShopPage"
 import { QuestPage } from "./pages/QuestPage"
 import { TestPage } from "./pages/TestPage"

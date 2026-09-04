@@ -7,7 +7,7 @@ const initialHeroState: HeroState = {
     gold: 10000,
     hp: 100,
     maxHp: 100,
-    heroImgSrc: '',
+    heroImgSrc: 'images/main/karbel.png',
     heroImgDesc: '',
     inventory: [],
     activeQuests: [],
