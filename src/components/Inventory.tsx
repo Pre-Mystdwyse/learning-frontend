@@ -20,12 +20,16 @@ export function Inventory() {
 
   return (
     <article>
-      <h3 className="mb-4 text-xl text-white md:text-3xl">
-        {hasItems ? 'Предметы в инвентаре:' : 'Пока что в инвентаре только эхо...'}
-      </h3>
-      <div className='grid grid-cols-6 mb-13'>
-        <div className='w-30 h-1 bg-slate-400 rounded origin-left rotate-21'></div>
-        <div className=''></div>
+      <div className='w-full h-16 bg-slate-700 rounded-t-3xl overflow-hidden flex items-center justify-center relative'>
+        <h3 className="text-xl text-violet-300 md:text-3xl relative z-10">
+          {hasItems ? 'Инвентарь персонажа' : 'Пока что в инвентаре только эхо...'}
+        </h3>
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_7px,#94a3b8_20px,#94a3b8_12px),repeating-linear-gradient(-45deg,transparent,transparent_7px,#94a3b8_20px,#94a3b8_12px)] opacity-50 rotate-180"></div>
+        <div className='absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(circle,transparent_50%,rgba(15,23,42,0.8)_100%)]'></div>
+      </div>
+      <div className='w-full h-16 my-4 relative overflow-hidden bg-slate-700 rounded-b-3xl'>
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_7px,#94a3b8_20px,#94a3b8_12px),repeating-linear-gradient(-45deg,transparent,transparent_7px,#94a3b8_20px,#94a3b8_12px)] opacity-50"></div>
+        <div className='absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(circle,transparent_50%,rgba(15,23,42,0.8)_100%)]'></div>
       </div>
       {hasItems && (
         <div ref={listRef} className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-4">
@@ -34,30 +38,22 @@ export function Inventory() {
           ))}
         </div>
       )}
-      <p>Общая стоимость инвентаря: {totalCost} золота</p>
-      <p>Общее количество предметов в инвентаре: {currentHeroInventory.length}</p>
+      <div className='grid grid-cols-3 gap-2 my-4 lg:mx-42'>
+        <div className='bg-slate-500 p-3 col-span-2 rounded-tl-3xl flex items-center'>
+          <p>Общая стоимость инвентаря:</p>
+        </div>
+        <div className='bg-slate-500 p-3 row-span-2 rounded-r-3xl grid grid-rows-2 gap-2 text-center font-bold'>
+          <div className='flex items-center justify-center'>
+            {totalCost}
+          </div>
+          <div className='flex items-center justify-center'>
+            {currentHeroInventory.length}
+          </div>
+        </div>
+        <div className='bg-slate-500 p-3 col-span-2 rounded-bl-3xl flex items-center'>
+          <p>Общее количество предметов в инвентаре:</p>
+        </div>
+      </div>
     </article>
   );
-}
-
-{
-  /* <article>
-            <h3>
-                {hasItems ? "Предметы в инвентаре:" : "Пока что в инвентаре только эхо..."}
-            </h3>
-            {hasItems && (
-                <ul ref={listRef}>
-                    {currentHeroInventory.map((item) => (
-                        <li key={item.id}>
-                            <img src={item.imgSrc} alt={item.imgDesc} />
-                            <h3>{item.name}</h3>
-                            <p>{item.price / 2}</p>
-                            <button onClick={() => sellItem(item.id)}>Продать</button>
-                        </li>
-                    ))}
-                </ul>
-            )}
-            <p>Общая стоимость инвентаря: {totalCost} золота</p>
-            <p>Общее количество предметов в инвентаре: {currentHeroInventory.length}</p>
-        </article> */
 }
