@@ -51,9 +51,9 @@ export interface Quest {
     id: string,
     difficulty: QuestDifficulty,
     title: string,
-    target: string,
-    rewardImg: string,
-    imgDescription: string,
+    goal: string,
+    reward: number,
+    duration: number,
     modalTitle: string,
     description: string,
 }

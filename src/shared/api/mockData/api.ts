@@ -1,27 +1,9 @@
 import { Quest, ShopItem } from "../../../entities/hero/model/types";
-import questsData from "./quests.json";
+import { questsData } from "./quests.mock";
 import itemsData from "./items.json";
+import { ApiError } from "./errors";
 
-export const fetchQuestsData = (): Promise<Quest[]> => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => { 
-            const tryingToConnect = Math.floor(Math.random() * 100) + 1;
-
-            if (tryingToConnect >= 25) {
-                const formattedQuests: Quest[] = questsData.map((item) => ({
-                    ...item,
-                    description: item.description.join(' '),
-                    difficulty: item.difficulty as Quest['difficulty'],
-                }));
-
-                resolve(formattedQuests);
-            }
-            else {
-                reject(new Error("Ошибка подключения к серверу"));
-            }
-        }, 2000)
-    })
-}
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const fetchItemsData = (): Promise<ShopItem[]> => {
     return new Promise((resolve, reject) => {
@@ -57,3 +39,35 @@ export const fetchItemsData = (): Promise<ShopItem[]> => {
         }, 2000)
     })
 }
+
+
+export const fetchQuestsData = async (excludeIds: string[]): Promise<Quest[]> => {
+    if (!Array.isArray(excludeIds) || excludeIds.some(id => typeof id !== 'string')) {
+        throw new ApiError(400, 'Некорректные входные данные: ожидал массив строк excludeIds.');
+    }
+
+    await sleep(2000);
+
+    const isServerError = (Math.floor(Math.random() * 100) + 1) < 50;
+    if (isServerError) {
+        throw new ApiError(500, 'Внутренняя ошибка сервера. Не удалось загрузить квесты.');
+    }
+
+    try {
+        const allQuests = [...questsData];
+
+        const excludeSet = new Set(excludeIds);
+        const filteredQuests = allQuests.filter(quest => !excludeSet.has(quest.id));
+
+        const shuffeledQuests = [...filteredQuests];
+        for (let i = shuffeledQuests.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffeledQuests[i], shuffeledQuests[j]] = [shuffeledQuests[j], shuffeledQuests[i]];
+        }
+
+        return shuffeledQuests.slice(0, 3);
+    }
+    catch (error) {
+        throw new ApiError(500, 'Произошла непредвиденная ошибка при обработке данных квестов.');
+    }
+};

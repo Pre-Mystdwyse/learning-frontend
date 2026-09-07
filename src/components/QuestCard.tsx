@@ -16,17 +16,10 @@ export function QuestCard({ quest }: QuestCardProps) {
     }
 
     return (
-        <article id={quest.id} className={`quest-card ${quest.difficulty}`}>
+        <article>
             <h3>{quest.title}</h3>
-            <strong className="target">{quest.target}</strong>
-            <strong className="reward">Награда:</strong>
-            <div className="img-box">
-                <img
-                className="item-img"
-                src={quest.rewardImg}
-                alt={quest.imgDescription}
-                />
-            </div>
+            <strong>{quest.goal}</strong>
+            <strong>Награда:</strong>
             <button type="button" onClick={() => setIsModalOpen(true) }>
                 Подробнее
             </button>
