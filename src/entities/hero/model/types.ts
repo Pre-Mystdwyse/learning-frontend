@@ -26,7 +26,6 @@ export interface HeroState {
     heroImgSrc: string;
     heroImgDesc: string;
     inventory: InventoryItem[];
-    activeQuests: Quest[];
 
     age: number,
     mood: CharacterMood,
@@ -41,25 +40,7 @@ export interface HeroStore extends HeroState {
     buyItem: (itemData: Omit<InventoryItem, 'id'>) => { success: boolean; reason?: string; };
     sellItem: (itemId: string) => void;
     undo: () => void;
-    acceptQuest: (quest: Quest) => { success: boolean; reason?: string };
     updateProfile: (newData: Partial<HeroState>) => void;
-}
-
-export type QuestDifficulty = 'easy' | 'medium' | 'hard';
-
-export interface Quest {
-    id: string,
-    difficulty: QuestDifficulty,
-    title: string,
-    goal: string,
-    reward: number,
-    duration: number,
-    modalTitle: string,
-    description: string,
-}
-
-export interface QuestCardProps {
-    quest: Quest,
 }
 
 export interface Item {
@@ -77,4 +58,38 @@ export type ShopFetch = Record<string, Item>;
 
 export interface ShopItemCardProps {
     itemData: ShopItem,
+}
+
+export type QuestDifficulty = 'easy' | 'medium' | 'hard';
+
+export interface Quest {
+    id: string,
+    difficulty: QuestDifficulty,
+    title: string,
+    goal: string,
+    reward: number,
+    duration: number,
+    modalTitle: string,
+    description: string,
+}
+
+export interface ActiveQuest extends Quest {
+    startedAt: number,
+}
+
+export interface QuestState {
+    availableQuests: Quest[],
+    activeQuests: ActiveQuest[],
+    completedQuests: string[],
+}
+
+export interface QuestStore extends QuestState {
+    loadQuests: () => void,
+    reloadQuests: () => void,
+    startQuest: (questId: string) => void,
+    endQuest: () => void,
+}
+
+export interface QuestCardProps {
+    quest: Quest,
 }

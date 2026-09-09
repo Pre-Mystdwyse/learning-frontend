@@ -10,7 +10,6 @@ const initialHeroState: HeroState = {
     heroImgSrc: 'images/main/karbel.png',
     heroImgDesc: '',
     inventory: [],
-    activeQuests: [],
     age: 20,
     mood: 'good-neutral',
     element: null,
@@ -25,7 +24,7 @@ export const useHeroStore = create<HeroStore>()(
         (set, get) => {
             const createSnapshot = (state: HeroStore): HeroState => {
                 const {
-                    history, buyItem, sellItem, undo, acceptQuest,
+                    history, buyItem, sellItem, undo,
                     ...pureHeroState
                 } = state;
                 return pureHeroState;
@@ -82,19 +81,6 @@ export const useHeroStore = create<HeroStore>()(
                     });
                 },
 
-                acceptQuest: (quest) => {
-                    const state = get();
-                    const alreadyAccepted = state.activeQuests.some(q => q.id === quest.id);
-                    if (alreadyAccepted) return { success: false, reason: 'already_aceepted' };
-
-                    set ({
-                        history: [...state.history, createSnapshot(state)],
-                        activeQuests: [...state.activeQuests, quest],
-                    });
-                    
-                    return { success: true };
-                },
-
                 updateProfile: (newData) => {
                     const state = get();
 
@@ -117,7 +103,6 @@ export const useHeroStore = create<HeroStore>()(
                 heroImgSrc: state.heroImgSrc,
                 heroImgDesc: state.heroImgDesc,
                 inventory: state.inventory,
-                activeQuests: state.activeQuests,
                 age: state.age,
                 mood: state.mood,
                 element: state.element,

@@ -40,12 +40,13 @@ export const fetchItemsData = (): Promise<ShopItem[]> => {
     })
 }
 
-
-export const fetchQuestsData = async (excludeIds: string[]): Promise<Quest[]> => {
+//async всегда возвращает Promise, поэтому при объявлении типа выходящего значения нужно написать и Promise
+export const fetchQuestsData = async (excludeIds: string[] = []): Promise<Quest[]> => {
+    //excludeIds.some(id => typeof id !== 'string') - это проверка на то, все ли элементы массива - типа строк
     if (!Array.isArray(excludeIds) || excludeIds.some(id => typeof id !== 'string')) {
         throw new ApiError(400, 'Некорректные входные данные: ожидал массив строк excludeIds.');
     }
-
+    //await останавливает выполнение функции до тех пор, пока не выполнится sleep
     await sleep(2000);
 
     const isServerError = (Math.floor(Math.random() * 100) + 1) < 50;
@@ -54,8 +55,14 @@ export const fetchQuestsData = async (excludeIds: string[]): Promise<Quest[]> =>
     }
 
     try {
+        //поверхностным копированием берём ссылки на объекты и записываем в новую константу
         const allQuests = [...questsData];
-
+        //set работает только с уникальным массивом. он берёт каждый элемент, прогоняет через хэш-функцию,
+        //которая превращает строку в уникальный адрес (индекс) в памяти
+        //при обращении через .has искомое значение прогоняют через хэш-функцию и переходят по полученной ссылке
+        //если там есть элемент - true
+        //set может принимать и строки и объекты. в объектах смотрит на ссылки, в строках - делит по буквам
+        //если передать в set что-то, где есть повторяющиеся элементы (кроме объектов), то он удалит дубликаты
         const excludeSet = new Set(excludeIds);
         const filteredQuests = allQuests.filter(quest => !excludeSet.has(quest.id));
 
@@ -64,7 +71,7 @@ export const fetchQuestsData = async (excludeIds: string[]): Promise<Quest[]> =>
             const j = Math.floor(Math.random() * (i + 1));
             [shuffeledQuests[i], shuffeledQuests[j]] = [shuffeledQuests[j], shuffeledQuests[i]];
         }
-
+        //.slice хорош тем, что если в массиве осталось меньше 3 элементов, то он не выдаст ошибку, а просто выведет все оставшиеся
         return shuffeledQuests.slice(0, 3);
     }
     catch (error) {
