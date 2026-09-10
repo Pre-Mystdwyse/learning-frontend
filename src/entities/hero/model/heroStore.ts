@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { HeroState, HeroStore, InventoryItem } from "./types";
+import { withHistory } from "./middlewares";
 
 const initialHeroState: HeroState = {
     name: 'Карбел',
@@ -17,27 +18,19 @@ const initialHeroState: HeroState = {
     info: null,
 }
 
-
-
 export const useHeroStore = create<HeroStore>()(
     persist(
-        (set, get) => {
-            const createSnapshot = (state: HeroStore): HeroState => {
-                const {
-                    history, buyItem, sellItem, undo,
-                    ...pureHeroState
-                } = state;
-                return pureHeroState;
-            }
-            return {
-                ...initialHeroState,
-                history: [],
+        withHistory((set) => ({
+            ...initialHeroState,
+            history: [],
 
-                buyItem: (itemData) => {
-                    const state = get();
+            buyItem: (itemData) => {
+                let result: { success: true } | { success: false; reason: "not_enough_gold" } = { success: true };
 
+                set((state) => {
                     if (state.gold < itemData.price) {
-                        return { success: false, reason: "not_enough_gold" };
+                        result = { success: false, reason: "not_enough_gold" };
+                        return {};
                     }
 
                     const newItem: InventoryItem = {
@@ -45,56 +38,57 @@ export const useHeroStore = create<HeroStore>()(
                         id: crypto.randomUUID(),
                     };
 
-                    set({
-                        history: [...state.history, createSnapshot(state)],
+                    return {
                         gold: state.gold - itemData.price,
-                        inventory: [...state.inventory, newItem],
-                    });
+                        inventory: [ ...state.inventory, newItem ],
+                    };
+                });
 
-                    return { success: true };
-                },
+                return result;
+            },
 
-                sellItem: (itemId) => {
-                    const state = get();
-                    const itemToSell = state.inventory.find(item => item.id === itemId);
+            sellItem: (itemId) => {
+                set((state) => {
+                    const itemIndex = state.inventory.findIndex(item => item.id === itemId);
+                    if (itemIndex === -1) return {};
 
-                    if (!itemToSell) return;
+                    const itemToSell = state.inventory[itemIndex];
 
-                    set ({
-                        history: [...state.history, createSnapshot(state)],
+                    return {
                         gold: state.gold + Math.floor(itemToSell.price / 2),
-                        inventory: state.inventory.filter(item => item.id !== itemId),
-                    });
-                },
+                        inventory: state.inventory.toSpliced(itemIndex, 1),
+                    };
+                });
+            },
 
-                undo: () => {
-                    const state = get();
-                    
-                    if (state.history.length === 0) return;
+            undo: () => {
+                set((state) => {
+                    if (state.history.length === 0) return {};
 
-                    const previousState = state.history[state.history.length - 1];
-                    const newHistory = state.history.slice(0, -1);
+                    return {
+                        ...state.history.at(-1),
+                        history: state.history.slice(0, -1),
+                        skipHistory: true,
+                    };
+                });
+            },
 
-                    set ({
-                        ...previousState,
-                        history: newHistory,
-                    });
-                },
+            updateProfile: (newData) => {
+                set(() => ({
+                    ...newData,
+                }));
+            },
 
-                updateProfile: (newData) => {
-                    const state = get();
-
-                    set({
-                        history: [ ...state.history, createSnapshot(state)],
-                        ...newData,
-                    });
-                }
-        }},
+            getGold: (amount) => {
+                set((state) => ({
+                    gold: state.gold + amount,
+                    skipHistory: true,
+                }));
+            }
+        })),
         {
-            name: 'hero-storage', //это ключ в localStorage
+            name: 'hero-storage',
             storage: createJSONStorage(() => localStorage),
-
-            //тут указываются только те поля, которые нужно сохранять в localStorage
             partialize: (state) => ({
                 name: state.name,
                 gold: state.gold,
