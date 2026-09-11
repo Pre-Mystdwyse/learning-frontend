@@ -41,7 +41,7 @@ export interface HeroStore extends HeroState {
     sellItem: (itemId: string) => void;
     undo: () => void;
     updateProfile: (newData: Partial<HeroState>) => void;
-    getGold: (amount: number) => void;
+    addGold: (amount: number) => void;
 }
 
 export interface Item {
@@ -85,10 +85,12 @@ export interface QuestState {
 }
 
 export interface QuestStore extends QuestState {
-    loadQuests: () => Quest[],
-    loadMoreQuests: () => Quest[],
+    isLoading: boolean,
+
+    loadQuests: () => Promise<Quest[]>,
     startQuest: (questId: string) => void,
-    endQuest: () => void,
+    endQuest: (questId: string) => void,
+    syncActiveQuests: () => void,
 }
 
 export interface QuestCardProps {

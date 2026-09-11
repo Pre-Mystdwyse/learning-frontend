@@ -20,31 +20,28 @@ const initialHeroState: HeroState = {
 
 export const useHeroStore = create<HeroStore>()(
     persist(
-        withHistory((set) => ({
+        withHistory((set, get) => ({
             ...initialHeroState,
             history: [],
 
             buyItem: (itemData) => {
-                let result: { success: true } | { success: false; reason: "not_enough_gold" } = { success: true };
+                const currentGold = get().gold;
 
-                set((state) => {
-                    if (state.gold < itemData.price) {
-                        result = { success: false, reason: "not_enough_gold" };
-                        return {};
-                    }
+                if (currentGold < itemData.price) {
+                    return { success: false, reason: "not_enough_gold"};
+                };
 
-                    const newItem: InventoryItem = {
-                        ...itemData,
-                        id: crypto.randomUUID(),
-                    };
+                const newItem: InventoryItem = {
+                    ...itemData,
+                    id: crypto.randomUUID(),
+                };
 
-                    return {
-                        gold: state.gold - itemData.price,
-                        inventory: [ ...state.inventory, newItem ],
-                    };
-                });
+                set((state) => ({
+                    gold: state.gold - itemData.price,
+                    inventory: [ ...state.inventory, newItem ],
+                }));
 
-                return result;
+                return { success: true };
             },
 
             sellItem: (itemId) => {
@@ -79,7 +76,7 @@ export const useHeroStore = create<HeroStore>()(
                 }));
             },
 
-            getGold: (amount) => {
+            addGold: (amount) => {
                 set((state) => ({
                     gold: state.gold + amount,
                     skipHistory: true,
