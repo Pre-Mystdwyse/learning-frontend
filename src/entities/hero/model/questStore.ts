@@ -19,30 +19,35 @@ export const useQuestStore = create<QuestStore> ()(
             return {
                 ...initialQuestsState,
                 isLoading: false,
+                isError: false,
+
+                loadOnLoad: async () => {
+                    if (get().availableQuests.length > 0) return;
+
+                    await get().loadQuests();
+                },
 
                 loadQuests: async () => {
-                    set({ isLoading: true });
+                    set({ isLoading: true, isError: false });
+                    
+                    const state = get();
+
+                    const excludeIds = [
+                        ...state.availableQuests.map(q => q.id),
+                        ...state.activeQuests.map(q => q.id),
+                        ...state.completedQuests,
+                    ];
 
                     try {
-                        const state = get();
-
-                        const allIds: string[] = [
-                            ...state.availableQuests.map(q => q.id),
-                            ...state.activeQuests.map(q => q.id),
-                            ...state.completedQuests
-                        ];
-
-                        const loadedData = await fetchQuestsData(allIds);
+                        const loadedData = await fetchQuestsData(excludeIds);
 
                         set((state) => ({
                             availableQuests: [ ...state.availableQuests, ...loadedData ],
                         }));
-
-                        return loadedData;
                     }
                     catch (error) {
-                        console.error("ошибка при загрузке квестов: ", error);
-                        throw error;
+                        set({ isError: true });
+                        console.error("Ошибка при загрузке данных: ", error);
                     }
                     finally {
                         set({ isLoading: false });
@@ -70,7 +75,7 @@ export const useQuestStore = create<QuestStore> ()(
                         ],
                     }));
 
-                    activeTimers[questId] = setTimeout(endQuest, questToMove.duration * 100, questId);
+                    activeTimers[questId] = setTimeout(() => endQuest(questId), questToMove.duration * 1000);
                 },
 
                 endQuest: (questId) => {
@@ -91,32 +96,21 @@ export const useQuestStore = create<QuestStore> ()(
                 syncActiveQuests: () => {
                     const currentTime = Date.now();
 
-                    const stillActiveQuests: ActiveQuest[] = [];
-                    const completedIds: string[] = [];
-
                     const currentQuests = get().activeQuests;
+
                     currentQuests.forEach(q => {
-                        const endTime = q.startedAt + q.duration * 1000;
+                        const endTime = q.duration * 1000 + q.startedAt;
+
                         if (endTime <= currentTime) {
-                            completedIds.push(q.id);
                             get().endQuest(q.id);
                         }
                         else {
-                            stillActiveQuests.push(q);
-                        };
-                    });
-
-                    set((state) => ({
-                        activeQuests: stillActiveQuests,
-                        completedQuests: [ ...state.completedQuests, ...completedIds ],
-                    }));
-
-                    stillActiveQuests.forEach(q => {
-                        if (activeTimers[q.id]) {
-                            clearTimeout(activeTimers[q.id])
-                        };
-                        const timeRemains = q.startedAt + q.duration * 1000 - Date.now();
-                        activeTimers[q.id] = setTimeout(get().endQuest, timeRemains, q.id);
+                            if (activeTimers[q.id]) {
+                                clearTimeout(activeTimers[q.id]);
+                            }
+                            const timeRemains = endTime - currentTime;
+                            activeTimers[q.id] = setTimeout(() => get().endQuest(q.id), timeRemains);
+                        }
                     });
                 }
             }

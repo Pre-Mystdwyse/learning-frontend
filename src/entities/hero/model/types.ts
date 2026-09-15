@@ -86,8 +86,10 @@ export interface QuestState {
 
 export interface QuestStore extends QuestState {
     isLoading: boolean,
+    isError: boolean,
 
-    loadQuests: () => Promise<Quest[]>,
+    loadOnLoad: () => void,
+    loadQuests: () => void,
     startQuest: (questId: string) => void,
     endQuest: (questId: string) => void,
     syncActiveQuests: () => void,

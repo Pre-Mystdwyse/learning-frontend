@@ -55,8 +55,6 @@ export const fetchQuestsData = async (excludeIds: string[] = []): Promise<Quest[
     }
 
     try {
-        //поверхностным копированием берём ссылки на объекты и записываем в новую константу
-        const allQuests = [...questsData];
         //set работает только с уникальным массивом. он берёт каждый элемент, прогоняет через хэш-функцию,
         //которая превращает строку в уникальный адрес (индекс) в памяти
         //при обращении через .has искомое значение прогоняют через хэш-функцию и переходят по полученной ссылке
@@ -64,17 +62,18 @@ export const fetchQuestsData = async (excludeIds: string[] = []): Promise<Quest[
         //set может принимать и строки и объекты. в объектах смотрит на ссылки, в строках - делит по буквам
         //если передать в set что-то, где есть повторяющиеся элементы (кроме объектов), то он удалит дубликаты
         const excludeSet = new Set(excludeIds);
-        const filteredQuests = allQuests.filter(quest => !excludeSet.has(quest.id));
+        const filteredQuests = questsData.filter(quest => !excludeSet.has(quest.id));
 
-        const shuffeledQuests = [...filteredQuests];
-        for (let i = shuffeledQuests.length - 1; i > 0; i--) {
+        for (let i = filteredQuests.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [shuffeledQuests[i], shuffeledQuests[j]] = [shuffeledQuests[j], shuffeledQuests[i]];
+            [filteredQuests[i], filteredQuests[j]] = [filteredQuests[j], filteredQuests[i]];
         }
         //.slice хорош тем, что если в массиве осталось меньше 3 элементов, то он не выдаст ошибку, а просто выведет все оставшиеся
-        return shuffeledQuests.slice(0, 3);
+        return filteredQuests.slice(0, 3);
     }
     catch (error) {
-        throw new ApiError(500, 'Произошла непредвиденная ошибка при обработке данных квестов.');
+        if (error instanceof ApiError) throw error;
+        console.error("Критический баг в fetchQuestData: ", error);
+        throw new ApiError(500, "Внутренняя ошибка приложения");
     }
 };

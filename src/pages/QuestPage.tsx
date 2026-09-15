@@ -1,41 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
 import { QuestCard } from "../components/QuestCard";
-import { fetchQuestsData } from "../shared/api/mockData/api";
-import { Quest } from "../entities/hero/model/types";
 import { Inventory } from "../components/Inventory";
+import { useQuestStore } from "../entities/hero/model/questStore";
 
 export function QuestPage() {
-    const [ isLoading, setIsLoading ] = useState<boolean>(true);
-    const [ isError, setIsError ] = useState<boolean>(false);
-    const [ data, setData ] = useState<Quest[]>([]);
+    const data = useQuestStore((state) => state.availableQuests);
 
-    //useCallback нужен для запоминания ссылки на функцию
-    //в этом контексте это нужно для useEffect, чтобы не войти в inf loop
-    //в массив зависиомстей useCallback сейчас ничего не нужно
-    //ибо эта функция не принимает ничего на вход
-    //может понадобиться, если будут поданы данные на вход
-    //если этого не сделать, то он будет помнить самые первые данные и только
-    const loadQuests = useCallback(async () => {
-        setIsLoading(true);
-        setIsError(false);
+    const isError = useQuestStore((state) => state.isError);
+    const isLoading = useQuestStore((state) => state.isLoading);
 
-        try {
-            const questsData = await fetchQuestsData();
-            setData(questsData);
-        }
-        catch {
-            setIsError(true);
-        }
-        finally {
-            setIsLoading(false);
-        }
-    }, []);
+    const loadOnLoad = useQuestStore((state) => state.loadOnLoad);
+    const loadQuests = useQuestStore((state) => state.loadQuests);
 
     useEffect(() => {
-        loadQuests();
-    }, [loadQuests]);
+        loadOnLoad();
+    }, [loadOnLoad]);
 
-    function handleRefetch() {
+    const handleRefetch = () => {
         loadQuests();
     }
 

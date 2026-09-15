@@ -7,10 +7,6 @@ export function QuestCard({ quest }: QuestCardProps) {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
     const acceptQuest = useHeroStore((state) => state.acceptQuest);
 
-    const isActive = useHeroStore((state) => 
-        state.activeQuests.some(q => q.id === quest.id)
-    );
-
     function handleAccept() {
         acceptQuest(quest);
     }
