@@ -22,8 +22,10 @@ export const useQuestStore = create<QuestStore> ()(
                 isError: false,
 
                 loadOnLoad: async () => {
-                    if (get().availableQuests.length > 0) return;
+                    const state = get();
+                    if (get().availableQuests.length > 0 || state.isLoading) return;
 
+                    //ts может писать, якобы await не сработает. для этого в интерфейсе нужно явно указать, что будет возвращён Promise<void>
                     await get().loadQuests();
                 },
 

@@ -49,7 +49,7 @@ export const fetchQuestsData = async (excludeIds: string[] = []): Promise<Quest[
     //await останавливает выполнение функции до тех пор, пока не выполнится sleep
     await sleep(2000);
 
-    const isServerError = (Math.floor(Math.random() * 100) + 1) < 50;
+    const isServerError = (Math.floor(Math.random() * 100) + 1) < 25;
     if (isServerError) {
         throw new ApiError(500, 'Внутренняя ошибка сервера. Не удалось загрузить квесты.');
     }
