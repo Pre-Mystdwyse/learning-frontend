@@ -4,7 +4,9 @@ import { Inventory } from "../components/Inventory";
 import { useQuestStore } from "../entities/hero/model/questStore";
 
 export function QuestPage() {
-    const data = useQuestStore((state) => state.availableQuests);
+    const availableQuests = useQuestStore((state) => state.availableQuests);
+    const activeQuests = useQuestStore((state) => state.activeQuests);
+    const data = [ ...activeQuests, ...availableQuests ];
 
     const isError = useQuestStore((state) => state.isError);
     const isLoading = useQuestStore((state) => state.isLoading);

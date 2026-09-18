@@ -102,3 +102,12 @@ export interface QuestCardProps {
 export interface StateWithHistory {
     history: any[],
 }
+
+export interface UseModalBehaviorOptions {
+    isOpen: boolean,
+    onClose: () => void,
+}
+
+export interface QuestProgressBarProps {
+    quest: ActiveQuest,
+}
