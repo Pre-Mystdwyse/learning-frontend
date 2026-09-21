@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { QuestCard } from "../components/QuestCard";
 import { Inventory } from "../components/Inventory";
 import { useQuestStore } from "../entities/hero/model/questStore";
@@ -6,7 +6,11 @@ import { useQuestStore } from "../entities/hero/model/questStore";
 export function QuestPage() {
     const availableQuests = useQuestStore((state) => state.availableQuests);
     const activeQuests = useQuestStore((state) => state.activeQuests);
-    const data = [ ...activeQuests, ...availableQuests ];
+
+    //мне не зачем тратить ресурсы на новое слияние квестов, если юзер просто обновит страницу
+    const data = useMemo(() => {
+        return [...activeQuests, ...availableQuests];
+    }, [activeQuests, availableQuests]);
 
     const isError = useQuestStore((state) => state.isError);
     const isLoading = useQuestStore((state) => state.isLoading);
@@ -52,7 +56,7 @@ export function QuestPage() {
                 )}
 
                 {!isLoading && !isError && (
-                    <div className="columns-2 sm:columns-3xs gap-3 space-y-3">
+                    <div className="columns-1 sm:columns-3xs gap-3 space-y-3">
                         {data.map((quest) => (
                             <QuestCard
                                 key={quest.id}

@@ -96,7 +96,7 @@ export interface QuestStore extends QuestState {
 }
 
 export interface QuestCardProps {
-    quest: Quest,
+    quest: Quest | ActiveQuest,
 }
 
 export interface StateWithHistory {

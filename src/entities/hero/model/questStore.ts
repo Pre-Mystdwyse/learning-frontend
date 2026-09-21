@@ -77,7 +77,7 @@ export const useQuestStore = create<QuestStore> ()(
                         ],
                     }));
 
-                    activeTimers[questId] = setTimeout(() => endQuest(questId), questToMove.duration * 1000);
+                    activeTimers[questId] = setTimeout(() => endQuest(questId), questToMove.duration * 1000 + 500);
                 },
 
                 endQuest: (questId) => {
@@ -111,7 +111,7 @@ export const useQuestStore = create<QuestStore> ()(
                                 clearTimeout(activeTimers[q.id]);
                             }
                             const timeRemains = endTime - currentTime;
-                            activeTimers[q.id] = setTimeout(() => get().endQuest(q.id), timeRemains);
+                            activeTimers[q.id] = setTimeout(() => get().endQuest(q.id), timeRemains + 500);
                         }
                     });
                 }

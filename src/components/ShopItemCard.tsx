@@ -35,7 +35,7 @@ export function ShopItemCard({ itemData }: ShopItemCardProps) {
         <div>{itemData.name}</div>
         <div className="my-2 h-1 w-full bg-green-500"></div>
       </div>
-      <div className="flex flex-1 items-center justify-center text-center break-all">
+      <div className="flex flex-1 items-center justify-center text-center">
         {itemData.imgDesc}
       </div>
       <div className="mt-auto w-full flex-none">

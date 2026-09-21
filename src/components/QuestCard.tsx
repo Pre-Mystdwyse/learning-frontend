@@ -1,14 +1,17 @@
 import { createPortal } from 'react-dom';
 import { QuestCardProps } from '../entities/hero/model/types';
-import { useState, useRef } from 'react';
+import { memo, useState, useRef } from 'react';
 import { useModalBehavior } from '../hooks/useModalBehavior';
 import { useQuestStore } from '../entities/hero/model/questStore';
+import { QuestProgressBar } from './ProgressBar';
 
-export function QuestCard({ quest }: QuestCardProps) {
+//здесь подходит memo, который сравнивает поверхностно. в сторе всё работает иммутабельно, причём ссылки на нетронутые квесты остаются нетронутыми, так что memo, вроде как, тут идеально
+export const QuestCard = memo(function QuestCard({ quest }: QuestCardProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const startQuest = useQuestStore((state) => state.startQuest);
 
+  //при проверке перед рендером компонента бара загрузки, ts может (не по своему опыту) ругнуться на quest, ибо "забудет", что он нужного типа... просто привести as ActiveQuest
   const isActive = 'startedAt' in quest;
 
   const [translateY, setTranslateY] = useState(0);
@@ -88,6 +91,11 @@ export function QuestCard({ quest }: QuestCardProps) {
         </button>
         <div className="w-[42%] rounded-br-lg border-2 border-violet-400 bg-purple-700 p-1 shadow-[0_0_8px_rgba(144,47,235,1)]"></div>
       </div>
+      {isActive && (
+        <QuestProgressBar
+          quest={quest}
+        />
+      )}
       {isModalOpen &&
         createPortal(
           <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center">
@@ -127,4 +135,4 @@ export function QuestCard({ quest }: QuestCardProps) {
         )}
     </article>
   );
-}
+});
