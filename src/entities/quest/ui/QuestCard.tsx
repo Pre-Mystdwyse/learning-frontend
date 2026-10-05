@@ -1,15 +1,17 @@
 import { createPortal } from 'react-dom';
-import { QuestCardProps } from '../entities/hero/model/types';
+import { Quest, ActiveQuest } from '../model/types';
 import { memo, useState, useRef } from 'react';
-import { useModalBehavior } from '../hooks/useModalBehavior';
-import { useQuestStore } from '../entities/hero/model/questStore';
+import { useModalBehavior } from '@/shared/hooks/useModalBehavior';
 import { QuestProgressBar } from './ProgressBar';
 
-//здесь подходит memo, который сравнивает поверхностно. в сторе всё работает иммутабельно, причём ссылки на нетронутые квесты остаются нетронутыми, так что memo, вроде как, тут идеально
-export const QuestCard = memo(function QuestCard({ quest }: QuestCardProps) {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+interface QuestCardProps {
+  quest: Quest | ActiveQuest,
+  actionSlot?: React.ReactNode,
+}
 
-  const startQuest = useQuestStore((state) => state.startQuest);
+//здесь подходит memo, который сравнивает поверхностно. в сторе всё работает иммутабельно, причём ссылки на нетронутые квесты остаются нетронутыми, так что memo, вроде как, тут идеально
+export const QuestCard = memo(function QuestCard({ quest, actionSlot }: QuestCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   //при проверке перед рендером компонента бара загрузки, ts может (не по своему опыту) ругнуться на quest, ибо "забудет", что он нужного типа... просто привести as ActiveQuest
   const isActive = 'startedAt' in quest;
@@ -57,12 +59,6 @@ export const QuestCard = memo(function QuestCard({ quest }: QuestCardProps) {
     onClose: () => setIsModalOpen(false),
   });
 
-  const handleStart = () => {
-    if (isActive) return;
-
-    startQuest(quest.id);
-  }
-
   return (
     <article className="flex aspect-auto break-inside-avoid flex-col items-center justify-center gap-2 border-2 bg-gray-700 p-2 text-center">
       <h3>{quest.title}</h3>
@@ -75,7 +71,9 @@ export const QuestCard = memo(function QuestCard({ quest }: QuestCardProps) {
         <img src="/images/all/gold-coins.png" alt="золотые монеты" className="h-[1em] w-[1em]" />
       </div>
       <div className="relative grid grid-cols-2 grid-rows-2 gap-1">
-        <div className={`ml-auto w-[42%] rounded-tl-lg border-2 p-1 transition-all duration-300 ${!isActive ? 'border-violet-400 bg-purple-700 shadow-[0_0_8px_rgba(144,47,235,1)]' : 'border-green-400 bg-green-700 shadow-[0_0_8px_rgba(21,128,61,1)]'}`}></div>
+        <div
+          className={`ml-auto w-[42%] rounded-tl-lg border-2 p-1 transition-all duration-300 ${!isActive ? 'border-violet-400 bg-purple-700 shadow-[0_0_8px_rgba(144,47,235,1)]' : 'border-green-400 bg-green-700 shadow-[0_0_8px_rgba(21,128,61,1)]'}`}
+        ></div>
         <button
           type="button"
           onClick={() => setIsModalOpen(true)}
@@ -83,19 +81,12 @@ export const QuestCard = memo(function QuestCard({ quest }: QuestCardProps) {
         >
           Подробнее
         </button>
-        <button
-          className={`rounded-l-lg border-2 transition-all duration-300 ${!isActive ? 'border-violet-400 bg-purple-700 shadow-[0_0_8px_rgba(144,47,235,1)]' : 'border-green-400 bg-green-700 shadow-[0_0_8px_rgba(21,128,61,1)]'} p-1`}
-          onClick={handleStart}
-        >
-          {isActive ? "Выполняется..." : "Начать"}
-        </button>
+
+        {actionSlot}
+
         <div className="w-[42%] rounded-br-lg border-2 border-violet-400 bg-purple-700 p-1 shadow-[0_0_8px_rgba(144,47,235,1)]"></div>
       </div>
-      {isActive && (
-        <QuestProgressBar
-          quest={quest}
-        />
-      )}
+      {isActive && <QuestProgressBar quest={quest} />}
       {isModalOpen &&
         createPortal(
           <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center">

@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { ShopItemCard } from "./ShopItemCard";
 import { ShopItem } from "../entities/hero/model/types";
-import { fetchItemsData } from "../shared/api/mockData/api";
+import { fetchItemsData } from "@/shared/api";
 
 export function RareShop() {
     const [ isLoading, setIsLoading ] = useState<boolean>(true);

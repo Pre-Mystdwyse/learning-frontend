@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Header } from './components/Header';
 import { Outlet } from 'react-router-dom';
-import { useQuestStore } from './entities/hero/model/questStore';
+import { useQuestStore } from './entities/quest/index';
 
 function App() {
 

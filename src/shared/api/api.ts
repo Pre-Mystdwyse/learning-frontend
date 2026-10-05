@@ -1,4 +1,5 @@
-import { Quest, ShopItem } from "../../../entities/hero/model/types";
+import { Quest } from "@/entities/quest/index";
+import { ShopItem } from "@/entities/hero/model/types";
 import { questsData } from "./quests.mock";
 import itemsData from "./items.json";
 import { ApiError } from "./errors";

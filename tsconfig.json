@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es2025",
+    //лучше всегда оставлять true
+    "useDefineForClassFields": true,
+    "lib": ["es2025", "DOM", "DOM.Iterable"],
+    "module": "esnext",
+    //оставлять true, чтобы проверять типы только в моём коде, не трогая библиотеки (те же node_modules)
+    "skipLibCheck": true,
+    //лучше так
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    //позволяет импортировать json как обычный файл. нужно
+    "resolveJsonModule": true,
+    //обязательно true, позволяет смотреть типы в каждом файле независимо от других. vite примерно так и работает
+    "isolatedModules": true,
+    //запрещает ts генерить свои файлы, тем самым отдаёт генерацию vite. ts по сути выступает мощным линтером
+    "noEmit": true,
+    //база, так и оставляю
+    "jsx": "react-jsx",
+    //включает широкий спектр проверки типов. строже проверка, больше: "а, точно!", меньше багов
+    "strict": true,
+    //проверка на неиспользуемые переменные. перед финальной версией (перед деплоем) надо включать и проверять
+    "noUnusedLocals": false,
+    //то же, что и выше
+    "noUnusedParameters": false,
+    //запрет на проход через все case в switch (если не написаны break и return)
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src"]
+}
