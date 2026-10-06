@@ -1,16 +1,5 @@
+import type { InventoryItem } from "@/entities/inventory";
 
-
-export interface InventoryItem {
-    id: string;
-    name: string;
-    price: number;
-    imgSrc: string;
-    imgDesc: string;
-}
-
-export interface InventoryItemCardProps {
-    item: InventoryItem,
-}
 
 export type CharacterMood = 'good-good' | 'good-neutral' | 'good-chaotic' | 'evil-good' | 'evil-neutral' | 'evil-chaotic';
 
@@ -42,23 +31,6 @@ export interface HeroStore extends HeroState {
     undo: () => void;
     updateProfile: (newData: Partial<HeroState>) => void;
     addGold: (amount: number) => void;
-}
-
-export interface Item {
-    name: string,
-    price: number,
-    imgSrc: string,
-    imgDesc: string,
-}
-
-export interface ShopItem extends Item {
-    id: string,
-}
-
-export type ShopFetch = Record<string, Item>;
-
-export interface ShopItemCardProps {
-    itemData: ShopItem,
 }
 
 export interface StateWithHistory {

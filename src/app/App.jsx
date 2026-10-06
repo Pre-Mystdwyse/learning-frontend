@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { Header } from './components/Header';
+import { Header } from '@/widgets/header';
 import { Outlet } from 'react-router-dom';
-import { useQuestStore } from './entities/quest/index';
+import { useQuestStore } from '@/entities/quest';
 
 function App() {
 

@@ -1,23 +1,11 @@
-import { useHeroStore } from '../entities/hero/model/heroStore';
-import { ShopItemCardProps } from '../entities/hero/model/types';
-import { useState } from 'react';
+import { ShopItem } from '../model/types';
 
-export function ShopItemCard({ itemData }: ShopItemCardProps) {
-  const buyItem = useHeroStore((state) => state.buyItem);
+export interface ShopItemCardProps {
+    itemData: ShopItem,
+    actionSlot?: React.ReactNode,
+}
 
-  const [isError, setIsError] = useState<boolean>(false);
-
-  const handleBuy = () => {
-    setIsError(false);
-
-    const result = buyItem(itemData);
-
-    if (result.success === false) {
-      setIsError(true);
-
-      setTimeout(() => setIsError(false), 2000);
-    }
-  };
+export function ShopItemCard({ itemData, actionSlot }: ShopItemCardProps) {
 
   return (
     <div className="group mx-auto flex w-full max-w-sm flex-col items-center justify-between rounded-xl border-2 border-violet-800 bg-gray-700 px-2 py-4 text-xl text-white transition-transform duration-300 md:hover:-translate-y-2">
@@ -35,19 +23,16 @@ export function ShopItemCard({ itemData }: ShopItemCardProps) {
         <div>{itemData.name}</div>
         <div className="my-2 h-1 w-full bg-green-500"></div>
       </div>
-      <div className="flex flex-1 items-center justify-center text-center">
-        {itemData.imgDesc}
-      </div>
+      <div className="flex flex-1 items-center justify-center text-center">{itemData.imgDesc}</div>
       <div className="mt-auto w-full flex-none">
         <div className="my-2 h-1 w-full bg-green-500"></div>
         <div className="mb-4 flex items-center justify-center gap-1">
           <div className="font-bold text-yellow-300 underline">Цена:</div>
           <div className="text-gray-300">{itemData.price}</div>
         </div>
-        <button onClick={handleBuy} className="group/btn relative w-full py-1 pb-2 z-10">
-          <div className="absolute inset-0 origin-top rounded-xl border-3 border-violet-500 bg-violet-900 shadow-[0_0_20px_rgba(139,92,246,0.6)] transition-transform duration-300 md:group-hover/btn:scale-y-115 md:group-hover/btn:shadow-[0_0_30px_rgba(139,92,246,0.8)] pointer-events-none"></div>
-          <span className="relative z-20 block text-2xl font-bold text-teal-100">Купить</span>
-        </button>
+
+        {actionSlot}
+
       </div>
     </div>
   );
