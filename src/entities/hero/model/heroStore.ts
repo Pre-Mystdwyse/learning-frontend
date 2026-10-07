@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { HeroState, HeroStore, InventoryItem } from "./types";
+import { HeroState, HeroStore } from "./types";
+import { InventoryItem } from "@/entities/inventory";
 import { withHistory } from "./middlewares";
 
 const initialHeroState: HeroState = {

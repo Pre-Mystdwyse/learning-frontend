@@ -1,2 +1,3 @@
 export { useHeroStore } from './model/heroStore';
-export type { HeroState, InventoryItem } from './model/types';
+export type { HeroState } from './model/types';
+export { HeroMainCard } from './ui/HeroMainCard';
