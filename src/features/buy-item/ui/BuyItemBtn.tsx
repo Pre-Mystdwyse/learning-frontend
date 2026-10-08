@@ -38,6 +38,7 @@ export function BuyItemBtn({ itemData }: BuyItemBtnProps) {
             }, 2000);
         };
     }
+    
     return (
         <button
             onClick={handleBuy}

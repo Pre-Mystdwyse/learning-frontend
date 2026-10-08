@@ -1,5 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { QuestProgressBarProps } from '../../hero/model/types';
+import { ActiveQuest } from '../model/types';
+
+export interface QuestProgressBarProps {
+    quest: ActiveQuest,
+}
 
 export function QuestProgressBar({ quest }: QuestProgressBarProps) {
   const barRef = useRef<HTMLDivElement>(null);

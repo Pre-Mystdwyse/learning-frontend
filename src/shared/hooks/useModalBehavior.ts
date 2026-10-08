@@ -1,5 +1,9 @@
 import { useEffect } from "react";
-import { UseModalBehaviorOptions } from "@/entities/hero/model/types";
+
+export interface UseModalBehaviorOptions {
+    isOpen: boolean,
+    onClose: () => void,
+}
 
 export const useModalBehavior = ({ isOpen, onClose }: UseModalBehaviorOptions) => {
     useEffect(() => {

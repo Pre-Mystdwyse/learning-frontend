@@ -1,7 +1,7 @@
 import { useMemo, useRef, useEffect } from 'react';
 import { useHeroStore } from '@/entities/hero';
 import { InventoryItemCard } from '@/entities/inventory';
-import { SellItemFromInventoryBtn } from '@/features/sell-item/ui/SellItemFromInventoryBtn';
+import { SellItemFromInventoryBtn } from '@/features/sell-item';
 
 export function Inventory() {
   const currentHeroInventory = useHeroStore((state) => state.inventory);

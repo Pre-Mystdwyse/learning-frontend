@@ -35,7 +35,8 @@ const router = createBrowserRouter([
 ]);
 
 //передача маршрутизатора в RouterProvider
-ReactDOM.createRoot(document.getElementById('root')).render(
+//тут ! значит, что точно не будет null
+ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <RouterProvider router={router} />
     </React.StrictMode>

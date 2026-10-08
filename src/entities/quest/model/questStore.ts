@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { QuestState, QuestStore } from './types';
 import { fetchQuestsData } from '@/shared/api';
-import { useHeroStore } from '../../hero/model/heroStore';
+import { useHeroStore } from '@/entities/hero';
 
 const initialQuestsState: QuestState = {
   availableQuests: [],

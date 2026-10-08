@@ -1,4 +1,4 @@
-import { Quest } from "../../../entities/hero/model/types";
+import { Quest } from "../model/types";
 
 export const questsData = [
     {

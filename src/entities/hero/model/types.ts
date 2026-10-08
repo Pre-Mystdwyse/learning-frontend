@@ -36,8 +36,3 @@ export interface HeroStore extends HeroState {
 export interface StateWithHistory {
     history: any[],
 }
-
-export interface UseModalBehaviorOptions {
-    isOpen: boolean,
-    onClose: () => void,
-}

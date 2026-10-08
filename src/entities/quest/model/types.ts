@@ -31,7 +31,3 @@ export interface QuestStore extends QuestState {
     endQuest: (questId: string) => void,
     syncActiveQuests: () => void,
 }
-
-export interface QuestProgressBarProps {
-    quest: ActiveQuest,
-}

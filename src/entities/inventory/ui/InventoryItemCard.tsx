@@ -1,4 +1,4 @@
-import { InventoryItem } from "@/entities/hero";
+import { InventoryItem } from "../model/types";
 
 export interface InventoryItemCardProps {
     item: InventoryItem,

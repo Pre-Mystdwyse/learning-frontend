@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 import { Quest, ActiveQuest } from '../model/types';
 import { memo, useState, useRef } from 'react';
-import { useModalBehavior } from '@/shared/hooks/useModalBehavior';
+import { useModalBehavior } from '@/shared/hooks';
 import { QuestProgressBar } from './ProgressBar';
 
 interface QuestCardProps {
