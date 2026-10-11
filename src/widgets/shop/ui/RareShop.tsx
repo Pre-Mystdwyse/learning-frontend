@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { ShopItemCard } from '@/entities/shop';
 import { ShopItem } from '@/entities/shop/model/types';
-import { fetchItemsData } from '@/shared/api';
+import { fetchItemsData } from '@/entities/shop/api/fetchShopItems';
 import { BuyItemBtn } from '@/features/buy-item';
 
 export function RareShop() {
