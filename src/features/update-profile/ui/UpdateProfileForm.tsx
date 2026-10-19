@@ -1,4 +1,5 @@
 import { useProfileForm } from '../model/useProfileForm';
+import { Controller } from 'react-hook-form';
 
 const SKILLS = [
   { val: 'stealth', label: 'Скрытность' },
@@ -9,30 +10,53 @@ const SKILLS = [
 const inputClasses = 'w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors';
 
 export function UpdateProfileForm() {
-  const { handleChange, formData, handleSubmit } = useProfileForm();
+  const { register, errors, onSubmit, control } = useProfileForm();
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={onSubmit} className="space-y-8">
       <fieldset className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-400">Имя персонажа</label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
+            {...register("name")}
             className={inputClasses}
           />
+          <div className='mt-1 min-h-[1.5lh] transition-all duration-200'>
+            {errors.name && (
+              <p className='text-sm text-red-500 animate-fade-in'>
+                {errors.name.message}
+              </p>
+            )}
+          </div>
         </div>
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-400">Возраст героя</label>
-          <input
-            type="number"
+          <Controller
+            control={control}
             name="age"
-            value={formData.age}
-            onChange={handleChange}
-            className={inputClasses}
+            render={({ field: { onChange, value, ref } }) => (
+              <input
+                type='text'
+                inputMode='numeric'
+                pattern='[0-9]*'
+                ref={ref}
+                className={inputClasses}
+                value={value ?? ""}
+                onChange={(e) => {
+                  const onlyNums = e.target.value.replace(/\D/g, "");
+                  onChange(onlyNums === "" ? "" : Number(onlyNums));
+                }}
+              />
+            )}
           />
+          <div className='mt-1 min-h-[1.5lh] transition-all duration-200'>
+            {errors.age && (
+              <p className='text-sm text-red-500 animate-fade-in'>
+                {errors.age?.message}
+              </p>
+            )}
+          </div>
         </div>
       </fieldset>
 
@@ -41,11 +65,9 @@ export function UpdateProfileForm() {
           Мировоззрение
         </label>
         <select
-          name="mood"
           id="mood"
           required
-          value={formData.mood}
-          onChange={handleChange}
+          {...register("mood")}
           className={inputClasses}
         >
           <optgroup label="Добро">
@@ -69,10 +91,8 @@ export function UpdateProfileForm() {
               <label key={elem} className="group flex cursor-pointer items-center gap-3">
                 <input
                   type="radio"
-                  name="element"
                   value={elem}
-                  onChange={handleChange}
-                  checked={formData.element === elem}
+                  {...register("element")}
                   required
                   className="h-5 w-5 accent-violet-500"
                 />
@@ -97,10 +117,8 @@ export function UpdateProfileForm() {
               <label key={skill.val} className="group flex cursor-pointer items-center gap-3">
                 <input
                   type="checkbox"
-                  name="extra"
                   value={skill.val}
-                  onChange={handleChange}
-                  checked={formData.extra.includes(skill.val)}
+                  {...register("extra")}
                   className="h-5 w-5 rounded accent-violet-500"
                 />
                 <span className="text-slate-300 transition-colors group-hover:text-white">
@@ -117,13 +135,18 @@ export function UpdateProfileForm() {
           Примечание для мастера
         </label>
         <textarea
-          name="info"
-          value={formData.info}
           rows={3}
           placeholder="Изумительное изречение, но если, конечно, необходимо"
-          onChange={handleChange}
+          {...register("info")}
           className={`${inputClasses} resize-none`}
         />
+        <div className='mt-1 min-h-[1.5lh] transition-all duration-200'>
+            {errors.info && (
+              <p className='text-sm text-red-500 animate-fade-in'>
+                {errors.info.message}
+              </p>
+            )}
+          </div>
       </fieldset>
 
       <button

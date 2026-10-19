@@ -1,6 +1,8 @@
 import { useHeroStore } from '@/entities/hero';
-import { useState } from 'react';
 import { useShallow } from 'zustand/shallow';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { profileSchema, ProfileFormValues } from './schema';
 
 export const useProfileForm = () => {
   const { name, age, mood, element, extra, info, updateProfile } = useHeroStore(
@@ -15,49 +17,32 @@ export const useProfileForm = () => {
     })),
   );
 
-  const [formData, setFormData] = useState({
+const {
+  register,
+  handleSubmit,
+  control,
+  formState: { errors },
+} = useForm<ProfileFormValues>({
+  resolver: zodResolver(profileSchema),
+  mode: 'onTouched',
+  defaultValues: {
     name: name || '',
     age: age || 20,
     mood: mood || 'good-neutral',
     element: element || 'fire',
     extra: extra || [],
     info: info || '',
-  });
+  }
+});
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value, type } = event.target;
-
-    setFormData((prev) => {
-      switch (type) {
-        case 'checkbox': {
-          const isChecked = (event.target as HTMLInputElement).checked;
-          return {
-            ...prev,
-            [name]: isChecked
-              ? [...(prev[name as keyof typeof prev] as string[]), value]
-              : (prev[name as keyof typeof prev] as string[]).filter((item) => item !== value),
-          };
-        }
-        default: {
-          return {
-            ...prev,
-            [name]: type === 'number' ? Number(value) : value,
-          };
-        }
-      }
-    });
-  };
-
-  const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-    updateProfile(formData);
-  };
+  const onSubmit = (data: ProfileFormValues) => {
+    updateProfile(data);
+  }
 
   return {
-    formData,
-    handleChange,
-    handleSubmit,
+    register,
+    errors,
+    control,
+    onSubmit: handleSubmit(onSubmit),
   };
 };
