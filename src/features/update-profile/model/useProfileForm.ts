@@ -21,6 +21,7 @@ const {
   register,
   handleSubmit,
   control,
+  trigger,
   formState: { errors },
 } = useForm<ProfileFormValues>({
   resolver: zodResolver(profileSchema),
@@ -41,6 +42,7 @@ const {
 
   return {
     register,
+    trigger,
     errors,
     control,
     onSubmit: handleSubmit(onSubmit),

@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import { useProfileForm } from '../model/useProfileForm';
 import { Controller } from 'react-hook-form';
 
@@ -10,7 +11,10 @@ const SKILLS = [
 const inputClasses = 'w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors';
 
 export function UpdateProfileForm() {
-  const { register, errors, onSubmit, control } = useProfileForm();
+  const { register, errors, onSubmit, control, trigger } = useProfileForm();
+
+  const [elfWarning, setElfWarning] = useState(false);
+  const elfTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return (
     <form onSubmit={onSubmit} className="space-y-8">
@@ -32,31 +36,59 @@ export function UpdateProfileForm() {
         </div>
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-400">Возраст героя</label>
-          <Controller
-            control={control}
-            name="age"
-            render={({ field: { onChange, value, ref } }) => (
-              <input
-                type='text'
-                inputMode='numeric'
-                pattern='[0-9]*'
-                ref={ref}
-                className={inputClasses}
-                value={value ?? ""}
-                onChange={(e) => {
-                  const onlyNums = e.target.value.replace(/\D/g, "");
-                  onChange(onlyNums === "" ? "" : Number(onlyNums));
-                }}
-              />
-            )}
-          />
-          <div className='mt-1 min-h-[1.5lh] transition-all duration-200'>
-            {errors.age && (
-              <p className='text-sm text-red-500 animate-fade-in'>
-                {errors.age?.message}
-              </p>
-            )}
-          </div>
+
+            <Controller
+              control={control}
+              name='age'
+              render={({ field: { onChange, value, ref, onBlur } }) => (
+                <div>
+                  <input
+                    type="text"
+                    inputMode='numeric'
+                    pattern='[0-9]*'
+                    ref={ref}
+                    onBlur={onBlur}
+                    className={inputClasses}
+                    value={(value as unknown) === "" ? "" : (value ?? "")}
+                    onChange={(e) => {
+                      const onlyNums = e.target.value.replace(/\D/g, "");
+
+                      if (onlyNums === "") {
+                        onChange("");
+                        return;
+                      }
+
+                      let num = Number(onlyNums);
+
+                      if (num > 999) {
+                        num = 999;
+
+                        setElfWarning(true);
+                        if (elfTimerRef.current) clearTimeout(elfTimerRef.current);
+                        elfTimerRef.current = setTimeout(() => setElfWarning(false), 3000);
+                      }
+
+                      onChange(num);
+                    }}
+                  />
+
+                  <div className='mt-1 min-h-[1.5lh] transition-all duration-200'>
+                    {errors.age && (
+                      <p className='text-sm text-red-500 animate-fade-in'>
+                        {errors.age.message}
+                      </p>
+                    )}
+
+                    {!errors.age && elfWarning && (
+                      <p className='text-sm text-orange-400 animate-fade-in'>
+                        Вы не эльф! Возраст снижен до 999
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+            />
+
         </div>
       </fieldset>
 
