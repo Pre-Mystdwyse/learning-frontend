@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useProfileForm } from '../model/useProfileForm';
 import { Controller } from 'react-hook-form';
 
@@ -11,10 +11,18 @@ const SKILLS = [
 const inputClasses = 'w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors';
 
 export function UpdateProfileForm() {
-  const { register, errors, onSubmit, control, trigger } = useProfileForm();
+  const { register, errors, onSubmit, control } = useProfileForm();
 
   const [elfWarning, setElfWarning] = useState(false);
   const elfTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (!elfTimerRef.current) return;
+
+      clearTimeout(elfTimerRef.current);
+    };
+  }, []);
 
   return (
     <form onSubmit={onSubmit} className="space-y-8">
@@ -51,6 +59,7 @@ export function UpdateProfileForm() {
                     className={inputClasses}
                     value={(value as unknown) === "" ? "" : (value ?? "")}
                     onChange={(e) => {
+                      //регулярное выражение находится в /../ \D означает ВСЁ, КРОМЕ ЦИФР, g - значит ВСЕ
                       const onlyNums = e.target.value.replace(/\D/g, "");
 
                       if (onlyNums === "") {
