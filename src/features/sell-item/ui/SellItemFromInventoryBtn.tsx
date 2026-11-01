@@ -1,14 +1,15 @@
-import { useHeroStore } from "@/entities/hero"
+import { useHeroActions } from "@/entities/hero"
 
 interface SellItemFromInventoryBtnProps {
     itemId: string,
+    price: number,
 }
 
-export function SellItemFromInventoryBtn({ itemId }: SellItemFromInventoryBtnProps) {
-    const sellItem = useHeroStore((state) => state.sellItem);
+export function SellItemFromInventoryBtn({ itemId, price }: SellItemFromInventoryBtnProps) {
+    const { sellItem } = useHeroActions();
 
     const handleSell = () => {
-        sellItem(itemId);
+        sellItem(itemId, price);
     }
     return (
         <button

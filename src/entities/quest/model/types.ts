@@ -16,18 +16,16 @@ export interface ActiveQuest extends Quest {
 }
 
 export interface QuestState {
-    availableQuests: Quest[],
     activeQuests: ActiveQuest[],
     completedQuests: string[],
 }
 
-export interface QuestStore extends QuestState {
-    isLoading: boolean,
-    isError: boolean,
-
-    loadOnLoad: () => Promise<void>,
-    loadQuests: () => Promise<void>,
-    startQuest: (questId: string) => void,
+interface QuestStoreActions {
+    startQuest: (quest: Quest) => void,
     endQuest: (questId: string) => void,
     syncActiveQuests: () => void,
+}
+
+export interface QuestStore extends QuestState {
+    actions: QuestStoreActions,
 }

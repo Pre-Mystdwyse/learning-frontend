@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react"
-import { useHeroStore } from "@/entities/hero"
+import { useHeroActions } from "@/entities/hero"
 import { ShopItem } from "@/entities/shop";
 
 interface BuyItemBtnProps {
@@ -7,7 +7,7 @@ interface BuyItemBtnProps {
 }
 
 export function BuyItemBtn({ itemData }: BuyItemBtnProps) {
-    const buyItem = useHeroStore((state) => state.buyItem);
+    const { buyItem } = useHeroActions();
 
     const [ isError, setIsError ] = useState<boolean>(false);
 

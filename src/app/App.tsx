@@ -6,7 +6,7 @@ import { useQuestStore } from '@/entities/quest';
 function App() {
 
     useEffect(() => {
-        const syncQuests = useQuestStore.getState().syncActiveQuests;
+        const syncQuests = useQuestStore.getState().actions.syncActiveQuests;
         syncQuests();
     }, []);
 

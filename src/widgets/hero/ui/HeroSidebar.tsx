@@ -1,9 +1,9 @@
-import { HeroMainCard, useHeroStore } from "@/entities/hero"
+import { HeroMainCard } from "@/entities/hero"
+import { useHeroMainCardData } from "@/entities/hero/model/selectors"
 
 export function HeroSidebar() {
-    const name = useHeroStore((state) => state.name);
-    const heroImgSrc = useHeroStore((state) => state.heroImgSrc);
-    const heroImgDesc = useHeroStore((state) => state.heroImgDesc);
+
+  const { name, heroImgDesc, heroImgSrc } = useHeroMainCardData();
 
     return (
         <aside className="space-y-6 lg:sticky lg:top-24 lg:col-span-4">

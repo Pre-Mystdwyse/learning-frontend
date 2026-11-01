@@ -1,4 +1,5 @@
-import type { InventoryItem } from "@/entities/inventory";
+import type { InventoryInstance } from "@/entities/inventory";
+import type { ShopItem } from "@/entities/shop";
 
 
 export type CharacterMood = 'good-good' | 'good-neutral' | 'good-chaotic' | 'evil-good' | 'evil-neutral' | 'evil-chaotic';
@@ -14,7 +15,7 @@ export interface HeroState {
     maxHp: number;
     heroImgSrc: string;
     heroImgDesc: string;
-    inventory: InventoryItem[];
+    inventory: InventoryInstance[];
 
     age: number,
     mood: CharacterMood,
@@ -23,14 +24,18 @@ export interface HeroState {
     info: string | null,
 }
 
-export interface HeroStore extends HeroState {
-    history: HeroState[];
-
-    buyItem: (itemData: Omit<InventoryItem, 'id'>) => { success: boolean; reason?: string; };
-    sellItem: (itemId: string) => void;
+interface HeroStoreActions {
+    buyItem: (itemData: ShopItem) => { success: boolean; reason?: string; };
+    sellItem: (instanceId: string, price: number) => void;
     undo: () => void;
     updateProfile: (newData: Partial<HeroState>) => void;
     addGold: (amount: number) => void;
+}
+
+export interface HeroStore extends HeroState {
+    history: HeroState[];
+
+    actions: HeroStoreActions;
 }
 
 export interface StateWithHistory {

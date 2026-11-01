@@ -1,7 +1,7 @@
-import { useHeroStore } from "@/entities/hero"
+import { useHeroActions, useHeroStore } from "@/entities/hero"
 
 export function UndoInventoryBtn() {
-    const undo = useHeroStore((state) => state.undo);
+  const { undo } = useHeroActions();
     const historyLength = useHeroStore((state) => state.history.length);
 
     const hasHistory = historyLength > 0;

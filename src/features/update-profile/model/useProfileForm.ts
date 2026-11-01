@@ -1,21 +1,11 @@
-import { useHeroStore } from '@/entities/hero';
-import { useShallow } from 'zustand/shallow';
+import { useHeroActions, useProfileFormData } from '@/entities/hero';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { profileSchema, ProfileFormValues } from './schema';
 
 export const useProfileForm = () => {
-  const { name, age, mood, element, extra, info, updateProfile } = useHeroStore(
-    useShallow((state) => ({
-      name: state.name,
-      age: state.age,
-      mood: state.mood,
-      element: state.element,
-      extra: state.extra,
-      info: state.info,
-      updateProfile: state.updateProfile,
-    })),
-  );
+  const { name, age, mood, element, extra, info } = useProfileFormData();
+  const { updateProfile } = useHeroActions();
 
 const {
   register,

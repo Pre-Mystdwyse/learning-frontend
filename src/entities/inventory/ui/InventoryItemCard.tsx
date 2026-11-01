@@ -1,7 +1,7 @@
-import { InventoryItem } from "../model/types";
+import { FullItem } from "../model/types";
 
 export interface InventoryItemCardProps {
-    item: InventoryItem,
+    item: FullItem,
     actionSlot?: React.ReactNode,
 }
 

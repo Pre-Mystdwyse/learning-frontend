@@ -1,35 +1,19 @@
-import { useState, useCallback, useEffect } from 'react';
 import { ShopItemCard } from '@/entities/shop';
-import { ShopItem } from '@/entities/shop/model/types';
-import { fetchItemsData } from '@/entities/shop/api/fetchShopItems';
 import { BuyItemBtn } from '@/features/buy-item';
+import { getShopItems } from '@/entities/shop';
+import { useQuery } from '@tanstack/react-query';
 
 export function RareShop() {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [data, setData] = useState<ShopItem[]>([]);
 
-  const loadItems = useCallback(async () => {
-    setIsError(false);
-    setIsLoading(true);
-
-    try {
-      const itemsData = await fetchItemsData();
-      setData(itemsData);
-    } catch {
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadItems();
-  }, [loadItems]);
-
-  function handleRefetch() {
-    loadItems();
-  }
+  const {
+    data,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ['ShopItems'],
+    queryFn: getShopItems,
+  });
 
   return (
     <div>
@@ -48,7 +32,7 @@ export function RareShop() {
                 <p className="text-xl text-white">Кузнец ушёл на обед</p>
                 <button
                   className="border-violet w-full rounded-xl border-3 bg-violet-900 pb-1 text-xl font-bold text-teal-100"
-                  onClick={handleRefetch}
+                  onClick={() => refetch()}
                 >
                   Подождать
                 </button>
@@ -58,7 +42,7 @@ export function RareShop() {
 
           {!isLoading && !isError && (
             <>
-              {data.map((item) => (
+              {data?.map((item) => (
                 <ShopItemCard
                   key={item.id}
                   itemData={item}

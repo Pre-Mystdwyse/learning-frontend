@@ -1,17 +1,17 @@
-import { useQuestStore } from "@/entities/quest"
+import { ActiveQuest, Quest, useQuestActions } from "@/entities/quest"
 
 interface StartQuestBtnProps {
-    questId: string,
+    quest: Quest | ActiveQuest,
     isActive: boolean,
 }
 
-export function StartQuestBtn({ questId, isActive }: StartQuestBtnProps) {
-    const startQuest = useQuestStore((state) => state.startQuest);
+export function StartQuestBtn({ quest, isActive }: StartQuestBtnProps) {
+    const { startQuest } = useQuestActions();
 
     const handleStart = () => {
         if(isActive) return;
 
-        startQuest(questId);
+        startQuest(quest);
     }
     return (
         <button
