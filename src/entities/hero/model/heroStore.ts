@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { v7 as uuidv7 } from 'uuid';
 import { persist, createJSONStorage } from "zustand/middleware";
 import { HeroState, HeroStore } from "./types";
-import { InventoryInstance } from "@/entities/inventory";
+import type { InventoryInstance } from "@/entities/inventory";
 import { withHistory } from "./middlewares";
 
 const initialHeroState: HeroState = {

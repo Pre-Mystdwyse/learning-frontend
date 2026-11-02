@@ -1,4 +1,4 @@
-import { ShopItem } from "@/entities/shop";
+import type { ShopItem } from "@/entities/shop";
 
 export interface InventoryInstance {
     id: string,

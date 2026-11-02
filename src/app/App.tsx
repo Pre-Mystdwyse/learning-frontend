@@ -25,3 +25,10 @@ function App() {
 }
 
 export default App;
+
+/*
+пусть пока побудет тут
+
+npx steiger ./src
+
+*/
