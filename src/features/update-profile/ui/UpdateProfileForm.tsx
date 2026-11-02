@@ -112,14 +112,14 @@ export function UpdateProfileForm() {
           className={inputClasses}
         >
           <optgroup label="Добро">
-            <option value="good-good">Законно-добрый</option>
-            <option value="good-neutral">Нейтрально-добрый</option>
-            <option value="good-chaotic">Хаотично-добрый</option>
+            <option value="good-good">лютый добряк</option>
+            <option value="good-neutral">добрый</option>
+            <option value="good-chaotic">добрый пофигист</option>
           </optgroup>
           <optgroup label="Зло">
-            <option value="evil-good">Законно-злой</option>
-            <option value="evil-neutral">Нейтрально-злой</option>
-            <option value="evil-chaotic">Хаотично-злой</option>
+            <option value="evil-good">вроде злой</option>
+            <option value="evil-neutral">негативный</option>
+            <option value="evil-chaotic">фу токсик</option>
           </optgroup>
         </select>
       </fieldset>
