@@ -1,12 +1,14 @@
-import type { InventoryInstance } from "@/entities/inventory";
-import type { ShopItem } from "@/entities/shop";
-
 
 export type CharacterMood = 'good-good' | 'good-neutral' | 'good-chaotic' | 'evil-good' | 'evil-neutral' | 'evil-chaotic';
 
 export type CharacterElement = 'fire' | 'earth' | 'water' | 'air';
 
 export type CharacterProfessions = 'blacksmith' | 'alchemy' | 'stealth';
+
+export interface InventoryInstance {
+    id: string,
+    shopItemId: string,
+}
 
 export interface HeroState {
     name: string;
@@ -25,7 +27,7 @@ export interface HeroState {
 }
 
 interface HeroStoreActions {
-    buyItem: (itemData: ShopItem) => { success: boolean; reason?: string; };
+    buyItem: (itemId: string, itemPrice: number) => { success: boolean; reason?: string; };
     sellItem: (instanceId: string, price: number) => void;
     undo: () => void;
     updateProfile: (newData: Partial<HeroState>) => void;

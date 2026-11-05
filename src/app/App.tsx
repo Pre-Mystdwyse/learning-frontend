@@ -2,12 +2,16 @@ import { useEffect } from 'react';
 import { Header } from '@/widgets/header';
 import { Outlet } from 'react-router-dom';
 import { useQuestStore } from '@/entities/quest';
+import { useHeroStore } from '@/entities/hero';
 
 function App() {
 
     useEffect(() => {
-        const syncQuests = useQuestStore.getState().actions.syncActiveQuests;
-        syncQuests();
+        const syncActiveQuests = useQuestStore.getState().actions.syncActiveQuests;
+        syncActiveQuests();
+        const setQuestCallback = useQuestStore.getState().actions.setQuestCallback;
+        const addGold = useHeroStore.getState().actions.addGold;
+        setQuestCallback(addGold);
     }, []);
 
     return (

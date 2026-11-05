@@ -1,5 +1,5 @@
 import { HeroMainCard } from "@/entities/hero"
-import { useHeroMainCardData } from "@/entities/hero/model/selectors"
+import { useHeroMainCardData } from "@/entities/hero";
 
 export function HeroSidebar() {
 

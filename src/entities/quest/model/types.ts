@@ -18,12 +18,14 @@ export interface ActiveQuest extends Quest {
 export interface QuestState {
     activeQuests: ActiveQuest[],
     completedQuests: string[],
+    onQuestComplete: ((reward: number) => void) | null,
 }
 
 interface QuestStoreActions {
     startQuest: (quest: Quest) => void,
     endQuest: (questId: string) => void,
     syncActiveQuests: () => void,
+    setQuestCallback: (cb: (reward: number) => void) => void,
 }
 
 export interface QuestStore extends QuestState {

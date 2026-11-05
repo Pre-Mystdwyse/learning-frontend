@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { QuestState, QuestStore } from './types';
-import { useHeroStore } from '@/entities/hero';
 
 const initialQuestsState: QuestState = {
   activeQuests: [],
   completedQuests: [],
+  onQuestComplete: null,
 };
 
 const activeTimers: Record<string, ReturnType<typeof setTimeout>> = {};
@@ -17,6 +17,10 @@ export const useQuestStore = create<QuestStore>()(
         ...initialQuestsState,
 
         actions: {
+          setQuestCallback: (cb) => {
+            set({ onQuestComplete: cb });
+          },
+
           startQuest: (quest) => {
             if (!quest) {
               console.warn('Ошибка начала квеста: был некорректно передан квест в стор');
@@ -43,7 +47,11 @@ export const useQuestStore = create<QuestStore>()(
             const foundQuest = get().activeQuests.find((q) => q.id === questId);
             const reward = foundQuest?.reward ?? 0;
   
-            useHeroStore.getState().actions.addGold(reward);
+            const callback = get().onQuestComplete;
+
+            if (callback) {
+              callback(reward);
+            }
 
             set((state) => {  
               return {

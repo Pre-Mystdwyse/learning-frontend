@@ -42,10 +42,10 @@ export function QuestBoard() {
           onClick={() => refetch()}
           className="w-[30%] rounded-lg border-2 border-violet-300/60 bg-purple-600/60 py-1 transition duration-300 hover:border-violet-300 hover:bg-purple-600"
         >
-          Добавить квесты
+          Поменять квесты
         </button>
       </div>
-      <div className="h-1 w-full rounded-xl bg-green-500"></div>
+      <div className="h-1 w-full rounded-xl bg-green-500 my-2"></div>
 
       {isLoading && (
         <div>
@@ -91,6 +91,7 @@ export function QuestBoard() {
           })}
         </div>
       )}
+      <div className="h-1 w-full rounded-xl bg-green-500 mt-4"></div>
     </section>
   );
 }

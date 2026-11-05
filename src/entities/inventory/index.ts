@@ -1,2 +1,2 @@
 export { InventoryItemCard } from './ui/InventoryItemCard';
-export type { InventoryInstance, FullItem } from './model/types';
+export type { FullItem } from './model/types';

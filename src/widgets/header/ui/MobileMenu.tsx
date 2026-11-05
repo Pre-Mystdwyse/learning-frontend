@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom"
 import { Link } from "react-router-dom"
 import { NAV_LINKS } from "../model/nav.config"
-import { useModalBehavior } from "@/shared/hooks"
+import { useModalBehavior } from "@/shared/lib/useModalBehavior";
 
 interface MobileMenuProps {
     isOpen: boolean,

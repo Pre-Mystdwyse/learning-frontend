@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { v7 as uuidv7 } from 'uuid';
 import { persist, createJSONStorage } from "zustand/middleware";
 import { HeroState, HeroStore } from "./types";
-import type { InventoryInstance } from "@/entities/inventory";
+import type { InventoryInstance } from "./types";
 import { withHistory } from "./middlewares";
 
 const initialHeroState: HeroState = {
@@ -27,10 +27,10 @@ export const useHeroStore = create<HeroStore>()(
             history: [],
 
             actions: {
-                buyItem: (itemData) => {
+                buyItem: (itemId, itemPrice) => {
                     const currentGold = get().gold;
     
-                    if (currentGold < itemData.price) {
+                    if (currentGold < itemPrice) {
                         return { success: false, reason: "not_enough_gold"};
                     };
     
@@ -53,11 +53,11 @@ export const useHeroStore = create<HeroStore>()(
                         //вставить предыдущие значения до места вставки нового, вставить новое
                         //если на странице ещё есть место для сдвига - произойдёт сдвиг, но если страница занята полностью - она разделится
                         //b-деревья независимы и бд не умеет переносить данные из одной страницы на другую, поэтому и создаёт новые
-                        shopItemId: itemData.id,
+                        shopItemId: itemId,
                     };
     
                     set((state) => ({
-                        gold: state.gold - itemData.price,
+                        gold: state.gold - itemPrice,
                         inventory: [ ...state.inventory, newItem ],
                     }));
     

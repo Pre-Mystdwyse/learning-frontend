@@ -46,7 +46,7 @@ export function RareShop() {
                 <ShopItemCard
                   key={item.id}
                   itemData={item}
-                  actionSlot={<BuyItemBtn itemData={item} />}
+                  actionSlot={<BuyItemBtn itemId={item.id} itemPrice={item.price} />}
                 />
               ))}
             </>

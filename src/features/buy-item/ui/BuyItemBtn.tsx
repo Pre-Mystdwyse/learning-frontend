@@ -3,10 +3,11 @@ import { useHeroActions } from "@/entities/hero"
 import { ShopItem } from "@/entities/shop";
 
 interface BuyItemBtnProps {
-    itemData: ShopItem,
+    itemId: string,
+    itemPrice: number,
 }
 
-export function BuyItemBtn({ itemData }: BuyItemBtnProps) {
+export function BuyItemBtn({ itemId, itemPrice }: BuyItemBtnProps) {
     const { buyItem } = useHeroActions();
 
     const [ isError, setIsError ] = useState<boolean>(false);
@@ -28,7 +29,7 @@ export function BuyItemBtn({ itemData }: BuyItemBtnProps) {
             clearTimeout(timerRef.current);
         };
 
-        const result = buyItem(itemData);
+        const result = buyItem(itemId, itemPrice);
 
         if (!result.success) {
             setIsError(true);

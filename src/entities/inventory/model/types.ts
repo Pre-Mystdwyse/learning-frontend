@@ -1,10 +1,9 @@
-import type { ShopItem } from "@/entities/shop";
 
-export interface InventoryInstance {
-    id: string,
-    shopItemId: string,
-}
-
-export interface FullItem extends ShopItem {
+export interface FullItem {
     uuid: string,
+    id: string,
+    name: string,
+    price: number,
+    imgSrc: string,
+    imgDesc: string,
 }
