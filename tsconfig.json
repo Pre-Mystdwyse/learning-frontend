@@ -28,7 +28,11 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": [
+      "vitest/globals", 
+      "@testing-library/jest-dom"
+    ]
   },
-  "include": ["src", "steiger.config.ts"]
+  "include": ["src", "steiger.config.ts", "./src/shared/config/tests/setup.ts"]
 }

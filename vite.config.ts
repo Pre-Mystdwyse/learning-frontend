@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'path';
@@ -21,5 +21,10 @@ export default defineConfig({
                 main: resolve(import.meta.dirname, 'index.html')
             },
         },
+    },
+
+    test: {
+        environment: 'jsdom',    // Говорим Vitest использовать наш фейковый браузер
+        setupFiles: './src/shared/config/tests/setup.ts', // Файл, который запустится ДО всех тестов
     },
 });
