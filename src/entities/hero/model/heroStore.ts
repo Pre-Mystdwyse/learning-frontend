@@ -97,6 +97,12 @@ export const useHeroStore = create<HeroStore>()(
                 addGold: (amount) => {
                     set((state) => ({
                         gold: state.gold + amount,
+
+                        history: state.history.map(snapshot => ({
+                            ...snapshot,
+                            gold: snapshot.gold + amount,
+                        })),
+
                         skipHistory: true,
                     }));
                 }
