@@ -78,7 +78,7 @@ export function Inventory() {
           <p>Общая стоимость инвентаря:</p>
         </div>
         <div className="row-span-2 grid grid-rows-2 gap-2 rounded-r-3xl bg-slate-500 p-3 text-center font-bold">
-          <div className="flex items-center justify-center">{totalCost}</div>
+          <div className="flex items-center justify-center">{totalCost/2}</div>
           <div className="flex items-center justify-center">{fullInventoryItems.length}</div>
         </div>
         <div className="col-span-2 flex items-center rounded-bl-3xl bg-slate-500 p-3">
