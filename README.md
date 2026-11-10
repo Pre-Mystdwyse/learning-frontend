@@ -7,7 +7,7 @@
       </td>
       <td >
         <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-        <img src="https://img.shields.io/badge/TypeScript_6-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+        <img src="https://img.shields.io/badge/TypeScript_7-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
         <img src="https://img.shields.io/badge/Tailwind_4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
         <img src="https://img.shields.io/badge/Zustand_5-764ABC?style=for-the-badge&logo=redux&logoColor=white" alt="Zustand" />
         <img src="https://img.shields.io/badge/Vite_8-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
@@ -27,7 +27,7 @@
 Интерактивный дашборд с элементами RPG. Проект разработан для демонстрации навыков проектирования сложной бизнес-логики, работы с глобальным состоянием и построения масштабируемой архитектуры. Основной упор сделан на надёжность, производительность и чистоту кода. (UI/UX реализован базово, так как основной фокус проекта сделан на хардкорную логику, оптимизацию рендеринга и архитектурные паттерны)
 
 ## Технологический стек:
-* Core: React 19, TypeScript 6 (ES2025), Vite 8;
+* Core: React 19, TypeScript 7 (ES2025), Vite 8;
 * State management: Zustand 5, TanStack Query;
 * Routing: React Router v6;
 * Style: Tailwind CSS v4;

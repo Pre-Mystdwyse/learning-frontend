@@ -21,7 +21,6 @@
     "@types/react-dom": "^19.2.4",
     "@typescript-eslint/eslint-plugin": "^8.69.0",
     "@typescript-eslint/parser": "^8.69.0",
-    "@typescript/native": "npm:typescript@^7.0.2",
     "@vitejs/plugin-react": "^6.0.2",
     "eslint": "^10.9.1",
     "eslint-config-prettier": "^10.1.8",
@@ -34,7 +33,7 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "steiger": "^0.8.1",
     "tailwindcss": "^4.3.3",
-    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "typescript": "^7.0.2",
     "vite": "^8.0.12",
     "vitest": "^5.1.0"
   },
@@ -49,5 +48,13 @@
     "uuid": "^14.0.2",
     "zod": "^4.6.7",
     "zustand": "^5.0.15"
+  },
+  "overrides": {
+    "@typescript-eslint/parser": {
+      "typescript": "$typescript"
+    },
+    "@typescript-eslint/eslint-plugin": {
+      "typescript": "$typescript"
+    }
   }
 }
